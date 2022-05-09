@@ -32,22 +32,22 @@ void delays(unsigned long time)
 void SystemInit(void){};
 void LCD_data(unsigned char data)
 {
-	GPIO_PORTA_DATA_R &= ~0x40; 	// R/W = 0
+	//GPIO_PORTA_DATA_R &= ~0x40; 	// R/W will be connected to the GND externally
 	GPIO_PORTA_DATA_R |= 0x20; 		// RS = 1
-	delayms(1);
-	GPIO_PORTB_DATA_R = data;
+	delayms(2);
 	GPIO_PORTA_DATA_R |= 0x80; 		// EN = 1
-	delayms(1);
+	GPIO_PORTB_DATA_R = data;
+	delayms(2);
 	GPIO_PORTA_DATA_R &= ~0x80; 	// EN = 0
-	delayms(1);
+	delayms(2);
 }
 void LCD_command(unsigned char command)
 {
-	GPIO_PORTA_DATA_R &= ~0x60; 	// RS & R/W = 0
-	delayms(1);
-	GPIO_PORTB_DATA_R = command;
+	GPIO_PORTA_DATA_R &= ~0x20; 	// RS = 0
+	delayms(2);
 	GPIO_PORTA_DATA_R |= 0x80; 		// EN = 1
-	delayms(1);
+	GPIO_PORTB_DATA_R = command;
+	delayms(2);
 	GPIO_PORTA_DATA_R &= ~0x80; 	// EN = 0
 	delayms(2);
 }
@@ -71,10 +71,12 @@ void LCD_init()
 	GPIO_PORTA_PUR_R &= ~0xE0;
 	GPIO_PORTA_DIR_R |= 0xE0;
 	GPIO_PORTA_DEN_R |= 0xE0;
-	LCD_command(0x30); // wakeup
+	LCD_command(0x20); // Set 5x7 Font size
 	LCD_command(0x38); // 8-bit data
+	LCD_command(0x02); // Return Cursor Home
 	LCD_command(0x01); // clear
 	LCD_command(0x0F); // diplay on & cursor blinking
+	//LCD_command(0x30); // wakeup
 }
 
 	void LEDSW_Init(void)
