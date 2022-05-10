@@ -13,10 +13,12 @@ void cont_count3()
 
 int pause_count3()
 {
-	timer_last_read = Timer; //w ay 2sm 2nto 25tartooh
-	//disable ll systick
-	while(sw3_button == 0x0)
-	{NVIC_ST_CTRL_R &= ~0x1;}
+	timer_last_read = LCD_data(); //w ay 2sm 2nto 25tartooh
+	
+	while(sw3_button == 0x00)
+	{NVIC_ST_CTRL_R &= ~0x1;
+	 delays_display(timer_last_read)
+	}
 	cont_count3();
 	return(timer_last_read);
 }
