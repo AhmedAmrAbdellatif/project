@@ -6,6 +6,6 @@ void complete(){
 		buzzer();
 		RGB_blinks(0x0E);
 		}
-		GPIO_PORTX_DATA_R&=~0x01; //clear buzzer pin
+		GPIO_PORTE_DATA_R&=~0x20; //clear buzzer pin
 	        GPIO_PORTF_DATA_R&=~0x0E; //ckear leds
 	}
