@@ -120,7 +120,7 @@ void keypad_Init()
  	GPIO_PORTC_CR_R  |= 0xF0;             //allow changes to all the bits in port C
   	GPIO_PORTE_CR_R  |= 0x1E;             //allow changes to all the bits in port E
   	GPIO_PORTC_DIR_R |= 0xF0;             //set directions cols are o/ps
-	GPIO_PORTE_DIR_R |= 0x00;             //set directions raws are i/ps
+	GPIO_PORTE_DIR_R &=~ 0x1E;             //set directions raws are i/ps
 	GPIO_PORTE_PDR_R |= 0x1E;             //pull down resistor on Raws
 	GPIO_PORTC_DEN_R |= 0xF0;             //digital enable pins in port C
 	GPIO_PORTE_DEN_R |= 0x1E;             //digital enable pins in port E
