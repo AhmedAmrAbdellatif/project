@@ -1,4 +1,4 @@
-sw3_button = SW3_Input();
+SW3_button = Switch_Input(3);
 
 void resume()
 {
