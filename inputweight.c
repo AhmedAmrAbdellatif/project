@@ -4,7 +4,7 @@
 	
 		void desired_weight(char case, int i)
 		{
-			cooking:
+			
 			if (i<=9 && i>=1)
 			{
 				Clear_LCD();
@@ -39,7 +39,7 @@
 		void pushB&C()
 		{
 			
-		switch(keypad_input)
+		cooking:switch(keypad_input)
 		{
 			case 'B' :
 			LCD_data('Beef Weight?');
