@@ -20,16 +20,16 @@ int delayms(unsigned long time)
 		}
 		}
 		
-int delays_display(unsigned long time)
+int delays_display(unsigned long time)												
 		{
-		int temp = time;
-		for (counter=0; counter<time ; counter++)
+		for (counter=0; counter<time ; counter++)			//for(counter=time;counter>0;counter--)
 		{
-			LCD_data (temp--);
+			LCD_data (counter);
 			delayms(1000);
 			sw3();//cheak if sw3 is pressed(door is open)
 			//sw1();cheak if sw1 is pressed
 		}
+		counter = 0;
 		}
 		
 void SystemInit(void){};
