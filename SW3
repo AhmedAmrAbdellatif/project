@@ -2,33 +2,25 @@ sw3_button = SW3_Input();
 
 void resume()
 {
-	NVIC_ST_CTRL_R |= 0x1;
+NVIC_ST_CTRL_R |= 0x1;
 }
-
-
 
 
 void pause()
 {
 		
-		while (sw3_button != 0x10)
-		{
-			NVIC_ST_CTRL_R &= ~0x1;
-		}
-	resume();
+while (sw3_button != 0x10)
+{
+NVIC_ST_CTRL_R &= ~0x1;
+}
+resume();
 }
 
 
-
-
-void sw3()// cheak if sw3 is pressed
+void sw3_check()
 {
-	if (sw3_button == 0x0)
-	{
-
-		pause_count3();
-	}
-
-
-
+if (sw3_button != 0x10)
+{
+pause();
+}
 }
