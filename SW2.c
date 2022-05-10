@@ -3,5 +3,6 @@ void SW2_check()
 {
 if (SW2_button != 0x01)
 {
-start();
+delays_display(Value);
+		complete();
 }
