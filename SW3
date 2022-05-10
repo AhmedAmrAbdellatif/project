@@ -1,0 +1,37 @@
+int sw3_button;//= register ely han7oto feeh ;
+int timer_last_read;
+int Timer;//dh el register ely by3mel display ll time in sec. 3ala el lcd
+
+void cont_count3()
+{
+	Timer = timer_last_read;
+	//enable ll systick timer
+}
+
+
+
+
+int pause_count3()
+{
+	timer_last_read = Timer; //w ay 2sm 2nto 25tartooh
+	//disable ll systick
+	while(sw3_button == 0x0)
+	{}
+	cont_count3();
+	return(timer_last_read);
+}
+
+
+
+
+void sw3()// cheak if sw3 is pressed
+{
+	if (sw3_button == 0x0)
+	{
+
+		pause_count3();
+	}
+
+
+
+}
