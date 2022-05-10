@@ -5,7 +5,7 @@
 		void desired_weight(char case, int i)
 		{
 			cooking:
-			if (i<=9 || i>=1)
+			if (i<=9 && i>=1)
 			{
 				Clear_LCD();
 				LCD_data(i);
