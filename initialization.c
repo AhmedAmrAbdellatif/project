@@ -156,7 +156,7 @@ unsigned char Switch_Input (unsigned char i)
 			return GPIO_PORTF_DATA_R & 0x01;
 			break;
 		case 3:
-			//return GPIO_PORTF_DATA_R & 0x01;
+			return GPIO_PORTE_DATA_R & 0x01;
 			break;
 }
 void sw3_buzzer_init()
