@@ -1,4 +1,14 @@
-
+unsigned long calc(char arr[4])
+{
+    unsigned long duration = 0;
+    unsigned long i;
+    for (i = 0; i<4 ;i++)
+    {
+        arr [i]= (arr[i] - '0');
+    }
+    duration = arr[0] + arr[1]*10 + arr[2]*60 + arr[3]*600 ;
+    return duration;
+}
 void main()
 {
 	char time[4] = { };	//	time array = 00 00
@@ -13,15 +23,15 @@ void main()
 			//// 	print to LCD minutes		////
 			for(j=3; j>1; j--)
 			{
-					// print to LCD time[x] 
+				LCD_data(time[j]); 
 			}
 			
-			// print to LCD " : "
+			LCD_data(" : "); 
 			
 			//// 	print to LCD seconds		////
 			for(j=1; j>= 0; j--)
 			{
-					// print to LCD time[x]
+				LCD_data(time[j]); 
 			}
 			////			shifting elements of time array			////
 			for(j=i; j>=0&&(i+1<4); j--) //stop when you reach t[0] or t[4]
@@ -30,12 +40,13 @@ void main()
 			}
 		}
 		// wrong input
-		else // print to LCD " Error "
+		else LCD_data("err"); 
 		
 		if (button_2 == 0) // SW 2 is pressed
 		{
-			// start cooking
+			break;
 		}
 	
 	}
+	delays_display(calc(time));
 }
