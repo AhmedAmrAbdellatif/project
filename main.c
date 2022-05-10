@@ -10,7 +10,6 @@ void main()
 		time[0] = keypad_getkey; // new element is placed in t[o]
 		if (time[i] >= '0' && time[i] <= '9')	//time must be integer
 		{
-			unsigned long x;
 			//// 	print to LCD minutes		////
 			for(j=3; j>1; j--)
 			{
