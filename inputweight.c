@@ -30,7 +30,7 @@
 			{
 				Clear_LCD();
 				LCD_data('Err');
-				delays(2);
+				delayms(2000);
 				Clear_LCD();
 				goto cooking;
 			}
