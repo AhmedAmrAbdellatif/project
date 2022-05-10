@@ -2,16 +2,16 @@
 #include "tm4c123gh6pm.h"
 int counter;
 
-
+////	main delay block	/////
 void SysTick_wait(unsigned long delay)												
-{
-	NVIC_ST_CTRL_R = 0x0;							//to disable the Systick
-	NVIC_ST_RELOAD_R = delay-1;						//to enter the counting value
-	NVIC_ST_CURRENT_R = 0x0;						//initialize the counter with 0
-	NVIC_ST_CTRL_R	|= 0x5;							//to enable the Systick
-	while( (NVIC_ST_CTRL_R & 0x00010000) == 0) {}				//Checking for count bit
-}
-			
+			{
+				NVIC_ST_CTRL_R = 0x0;
+				NVIC_ST_RELOAD_R = delay-1;
+				NVIC_ST_CURRENT_R = 0x0;
+				NVIC_ST_CTRL_R	|= 0x5;					
+				while( (NVIC_ST_CTRL_R & 0x00010000) == 0) {}				//Checking for count bit
+			}
+////	delay 1 m Sec	/////		
 int delayms(unsigned long time)
 		{
 		for (counter=0; counter<time ; counter++)
