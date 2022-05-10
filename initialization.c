@@ -29,9 +29,9 @@ int delayms(unsigned long time)
 	}
 }
 		
-int delays_display(unsigned long time)												
+int delays_display(long time)												
 {
-	for (counter=time; counter>0 ; counter--)			
+	for (counter=time; counter>=0 ; counter--)			
 	{
 		LCD_data (counter);	
 		delayms(1000);
