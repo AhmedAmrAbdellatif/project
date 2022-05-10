@@ -3,7 +3,7 @@
 int counter;
 
 
-void SysTick_wait(unsigned long delay)
+void SysTick_wait(unsigned long delay)												
 			{
 				NVIC_ST_CTRL_R = 0x0;
 				NVIC_ST_RELOAD_R = delay-1;
