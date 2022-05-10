@@ -143,3 +143,10 @@ char keypad_getkey(void)
 					}
   }
 }				
+
+unsigned char SW1_Input (void)
+			{
+				
+						return GPIO_PORTF_DATA_R & 0x10;
+				
+			}
