@@ -1,5 +1,6 @@
 #include <stdint.h>
 #include "tm4c123gh6pm.h"
+int counter;
 
 
 void SysTick_wait(unsigned long delay)
@@ -11,21 +12,21 @@ void SysTick_wait(unsigned long delay)
 				while( (NVIC_ST_CTRL_R & 0x00010000) == 0) {}				//Checking for count bit
 			}
 			
-void delayms(unsigned long time)
+int delayms(unsigned long time)
 		{
-		int i;
-		for (i=0; i<time ; i++)
+		for (counter=0; counter<time ; counter++)
 		{
 			SysTick_wait(16000);																																										
 		}
 		}
 		
-void delays(unsigned long time)
+int delays_display(unsigned long time)
 		{
-		int i;
-		for (i=0; i<time ; i++)
+		int temp = time;
+		for (counter=0; counter<time ; counter++)
 		{
-			delayms(1000);																																										
+			LCD_data (temp--);
+			delayms(1000);
 		}
 		}
 		
