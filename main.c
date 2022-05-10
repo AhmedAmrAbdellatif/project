@@ -1,8 +1,9 @@
+////	calculating cooking time in secends	////
 unsigned long calc(char arr[4])
 {
     unsigned long duration = 0;
     unsigned long i;
-    for (i = 0; i<4 ;i++)
+    for (i = 0; i<4 ;i++)	// convert from char --> number
     {
         arr [i]= (arr[i] - '0');
     }
@@ -31,7 +32,7 @@ void main()
 				LCD_data(time[j]); 
 			}
 			
-			LCD_data(" : "); 
+			LCD_data(':'); 
 			
 			//// 	print to LCD seconds	////
 			for(j=1; j>= 0; j--)
