@@ -2,7 +2,7 @@ int sw3_button;//= register ely han7oto feeh ;
 int timer_last_read;
 int Timer;//dh el register ely by3mel display ll time in sec. 3ala el lcd
 
-void cont_count3()
+void resume()
 {
 	counter = timer_last_read;
 	delaays_display(counter)
@@ -11,15 +11,15 @@ void cont_count3()
 
 
 
-int pause_count3()
+void pause()
 {
+		sw3_button = SW3_Input();
+		while (button_in != 0x10)
+		{
+			NVIC_ST_CTRL_R &= ~0x1;
+		}
 	
-	
-	while(sw3_button == 0x00)
-	{NVIC_ST_CTRL_R &= ~0x1;
-	}
-	cont_count3();
-	return(timer_last_read);
+	resume();
 }
 
 
