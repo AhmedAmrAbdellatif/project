@@ -1,4 +1,4 @@
  void buzzer()
 	{
-		GPIO_PORTX_DATA_R|=0x01; //buzzer pin
+		GPIO_PORTE_DATA_R |=0x20;   //buzzer pin on 
 	}
