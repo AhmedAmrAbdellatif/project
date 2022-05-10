@@ -27,6 +27,8 @@ int delays_display(unsigned long time)
 		{
 			LCD_data (temp--);
 			delayms(1000);
+			sw3();//cheak if sw3 is pressed(door is open)
+			//sw1();cheak if sw1 is pressed
 		}
 		}
 		
