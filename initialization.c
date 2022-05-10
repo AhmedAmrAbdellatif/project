@@ -170,5 +170,5 @@ void sw3_buzzer_init()
 	GPIO_PORTE_AFSEL_R &= ~0x21;			//No alternative function
 	GPIO_PORTE_PCTL_R &= ~0xFFFFF;			//GPIO clear bit PCTL
 	GPIO_PORTE_DATA_R &= ~0x20;			//Initialize BUZZER to be off
-	GPIO_PORTF_PUR_R |= 0x01;			//SET pull-up resistance FOR sw3
+	GPIO_PORTE_PUR_R |= 0x01;			//SET pull-up resistance FOR sw3
 }
