@@ -1,11 +1,8 @@
-int sw3_button;//= register ely han7oto feeh ;
-int timer_last_read;
-int Timer;//dh el register ely by3mel display ll time in sec. 3ala el lcd
+sw3_button = SW3_Input();
 
 void resume()
 {
-	counter = timer_last_read;
-	delaays_display(counter)
+	NVIC_ST_CTRL_R |= 0x1;
 }
 
 
@@ -13,12 +10,11 @@ void resume()
 
 void pause()
 {
-		sw3_button = SW3_Input();
-		while (button_in != 0x10)
+		
+		while (sw3_button != 0x10)
 		{
 			NVIC_ST_CTRL_R &= ~0x1;
 		}
-	
 	resume();
 }
 
