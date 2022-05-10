@@ -2,7 +2,7 @@
 
 		char keypad_input = symbol[j][i];
 	
-		void desired_weight(char case, char i)
+		void desired_weight(char case, int i)
 		{
 			cooking:
 			if (i<=9 || i>=0)
