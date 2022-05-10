@@ -46,7 +46,7 @@
 			//while(keypad doesn't pressed) {};
 			desired_weight('B', keypad_input);
 			break;
-			case 'B' :
+			case 'C' :
 			LCD_data('Chicken Weight?');
 			//while(keypad doesn't pressed) {};
 			desired_weight('C', keypad_input);
