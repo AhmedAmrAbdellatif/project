@@ -11,7 +11,7 @@ unsigned long calc(char arr[4])
 }
 void main()
 {
-	char time[4] = { };	//	time array = 00 00
+	char time[4] = {'0', '0', '0', '0'};	//	time array = 00 00
 	long i, j; //	counters
 	
 	/////////		take inputs from Key bad and Disply it on LCD		/////////
