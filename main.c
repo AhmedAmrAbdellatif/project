@@ -12,7 +12,7 @@ unsigned long calc(char arr[4])
 void main()
 {
 	char time[4] = { };	//	time array = 00 00
-	unsigned long i, j; //	counters
+	long i, j; //	counters
 	
 	/////////		take inputs from Key bad and Disply it on LCD		/////////
 	for(i=0; i< 4; i++)
