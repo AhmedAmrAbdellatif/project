@@ -7,7 +7,7 @@ unsigned long calc(char arr[4])
     {
         arr [i]= (arr[i] - '0');
     }
-    duration = arr[0] + arr[1]*10 + arr[2]*60 + arr[3]*600 ;
+    duration = arr[0] + arr[1]*10 + arr[2]*60 + arr[3]*600;
     return duration;
 }
 void print_time (char time[4])
@@ -45,6 +45,15 @@ void Push_D()
 		{
 			break;
 		}
+		// SW 1 is pressed
+		if (Switch_Input (1) == 0) 
+		{
+			i = -1; // return to first round
+			Clear_LCD(); // clear the lcd
+			time[4] = {'0', '0', '0', '0'}; 
+			print_time(time); // display 00:00
+			
+		}
 		time[0] = keypad_getkey; // new element is placed in t[o] --> (default : second)
 		if (time[i] >= '0' && time[i] <= '9')	//time must be number
 		{
@@ -55,7 +64,7 @@ void Push_D()
 				time[j+1] = time[j];	// 10 minutes <--- 10 minutes <--- 10 Seconds <--- Seconds
 			}
 		}
-		// wrong input
+		// wrong input	 print error for 2 sec then retake this input & decrement i
 		else
 		{
 			Clear_LCD();
@@ -64,14 +73,6 @@ void Push_D()
 			Clear_LCD();
 			print_time(time);
 			i--;
-			
-			/*
-			handling the error :
-			
-			i = -1	: print error for 2 sec then take all inputs again 
-			or
-			i--	: print error for 2 sec then retake this input ( display the old inputs )
-			*/
 		}
 	}
 	delays_display(calc(time));
