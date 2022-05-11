@@ -68,7 +68,7 @@ void LCD_init()
 	LCD_command(0x02); // Return Cursor Home
 	LCD_command(0x01); // clear
 	LCD_command(0x0F); // diplay on & cursor blinking
-	//LCD_command(0x30); // wakeup
+	LCD_command(0x30); // wakeup
 }
 
 void LCD_data(unsigned char data)
