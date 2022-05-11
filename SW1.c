@@ -11,13 +11,14 @@ EnableInterrupts();         // Enable global Interrupt flag (I)
 
 
 //Function////InProgress//
+//IF SW1 pressed twice//
 
 char FallingEdges = 0;  "global" //Acts like a counter.  
 void GPIOPortF_Handler(void){
  GPIO_PORTF_ICR_R = 0x10; // acknowledge flag4
 if(FallingEdges ==1 ){
   FallingEdges ==0;
-  LCD_clear; 
+  LCD_clear;  //Stop
 }
 else
 {
@@ -25,3 +26,6 @@ FallingEdges ++;
 pause;
 }
   }
+
+
+
