@@ -21,7 +21,7 @@ void SysTick_wait(unsigned long delay)
 }
 
 ////	delay 1 m Sec	/////		
-int delayms(unsigned long time)
+void delayms(unsigned long time)
 {
 	for (counter=0; counter<time ; counter++)
 	{
@@ -29,7 +29,7 @@ int delayms(unsigned long time)
 	}
 }
 		
-int delays_display(long time)												
+void delays_display(long time)												
 {
 	for (counter=time; counter>=0 ; counter--)			
 	{
