@@ -20,7 +20,7 @@ void GPIOPortF_Handler(void){
     if(FallingEdges ==1 )      //FallingEdges is initialized by '0'
     {
        FallingEdges =0;        //clear the counter
-       LCD_clear();              //Stop
+       stop();                
 		}
        else
        {
@@ -34,7 +34,7 @@ void GPIOPortF_Handler(void){
       GPIO_PORTF_ICR_R = 0x01;         // clear the interrupt flag 
       if(FallingEdges ==1)              //to make sure that we are pasuing cooking
 		 {
-			 resume();                       //resume cooking
+			 resume();                       
 		 }
 	 }
 	
