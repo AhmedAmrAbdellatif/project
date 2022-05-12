@@ -27,8 +27,8 @@ void GPIOPortF_Handler(void){
          pause;               //pause cooking
        }
 		 }
-	 else if (GPIO_PORTF_MIS_R & 0x01)   //check if interrupt causes by PF0/SW2
-		  GPIO_PORTF_ICR_R = 0x01;         // clear the interrupt flag 
+   else if (GPIO_PORTF_MIS_R & 0x01)   //check if interrupt causes by PF0/SW2
+     GPIO_PORTF_ICR_R = 0x01;         // clear the interrupt flag 
      if(FallingEdges ==1)              //to make sure that we are pasuing cooking
 		 {
 			 resume();                       //resume cooking
