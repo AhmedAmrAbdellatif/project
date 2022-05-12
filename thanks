@@ -1,0 +1,14 @@
+		LCD_command(0x01);
+		delayms(3000);
+		LCD_string("...Complete");
+
+		for(x=0; x<3; x++)
+		{
+		blink_buzzer(0x0E);
+		delayms(500);
+		}
+		GPIO_PORTE_DATA_R&=~0x20; //clear buzzer pin
+	  GPIO_PORTF_DATA_R&=~0x0E; //ckear leds	
+		delayms(100);
+		LCD_command(0x01);
+		LCD_string("Thank You :)");
