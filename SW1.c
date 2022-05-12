@@ -20,22 +20,25 @@ void GPIOPortF_Handler(void){
     if(FallingEdges ==1 )      //FallingEdges is initialized by '0'
     {
        FallingEdges =0;        //clear the counter
-       LCD_clear;              //Stop
+       LCD_clear();              //Stop
+		}
        else
        {
          FallingEdges ++;     //FallingEdges=1
-         pause;               //pause cooking
+         pause();               //pause cooking
        }
-		 }
+		 
+	 }
    else if (GPIO_PORTF_MIS_R & 0x01)   //check if interrupt causes by PF0/SW2
-     GPIO_PORTF_ICR_R = 0x01;         // clear the interrupt flag 
-     if(FallingEdges ==1)              //to make sure that we are pasuing cooking
+   {
+      GPIO_PORTF_ICR_R = 0x01;         // clear the interrupt flag 
+      if(FallingEdges ==1)              //to make sure that we are pasuing cooking
 		 {
 			 resume();                       //resume cooking
 		 }
+	 }
+	
 	}
-}
-    
     
 
  
