@@ -27,7 +27,7 @@ void print_time (char time[4])
 		LCD_data(time[j]); 
 	}
 }
-void Push_D()
+void PushD()
 {
 	char time[4] = {'0', '0', '0', '0'};	//	time array = 00 : 00
 	long i, j; //	counters
