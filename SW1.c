@@ -54,7 +54,7 @@ if(SW3_button == 1) {            //check that the door is closed
 	   complete();*/   
 	      
 	 }
-	else if(FallingEdges ==0 && (calc(time) != 0))   //pressed SW2 to start cooking for case 'D'
+	else if((FallingEdges ==0) && ((calc(time) != 0))   //pressed SW2 to start cooking for case 'D'
 		{
 			 /*"start cooking for case 'D' "
 			 delays_display(calc(time));
