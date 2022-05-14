@@ -14,7 +14,8 @@ EnableInterrupts();         // Enable global Interrupt flag (I)
 //Function////InProgress//
   
 void GPIOPortF_Handler(void){
-if(/*SW3_released)*/) {
+SW3_button = Switch_Input(3);
+if(SW3_button == 1) {
   if(GPIO_PORTF_MIS_R & 0x10)   //check if interrupt causes by PF4/SW1
   {     
     GPIO_PORTF_ICR_R = 0x10;   // clear the interrupt flag 
@@ -62,7 +63,7 @@ if(/*SW3_released)*/) {
 			 
 	 }
  }
-else();
+else(SW3_button == 0);
 }
 
 
