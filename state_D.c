@@ -1,3 +1,23 @@
+
+long check_counter;
+char keypad_check()					
+{
+	char checker = 1;
+ 	while(1)		
+	{
+		for(int check_counter = 0; check_counter < 4; check_counter++)	//scan rows
+				{
+					if( (GPIO_PORTE_DATA_R & 0x1E) & (1 << (check_counter+1) ) )
+					{
+						checker = 0;
+						return checker;
+					}
+					
+				}
+	}
+}
+
+
 void pushD()
 {
 	
@@ -44,7 +64,7 @@ void pushD()
 		}
 		
 		
-		while(time[0] == keypad_input());
+		while(keypad_check());
 		
 			////	  shifting elements of time array	////
 			for(j=i; j>=0 && (i<4); j--) //stop when you reach t[0] or t[3]
@@ -101,16 +121,16 @@ void pushD()
 	
 	GPIO_PORTF_DATA_R |=0x0E;
 					
-						for (countdown=pushd_time;countdown>0;countdown--)
-						{
-							GPIO_PORTF_DATA_R |=0x0E;	
-							LCD_number(countdown);
-							delayms(1000);
-							clear_LCD;
-						}
+	for (countdown=pushd_time;countdown>0;countdown--)
+	{
+		GPIO_PORTF_DATA_R |=0x0E;	
+		LCD_number(countdown);
+		delayms(1000);
+		clear_LCD;
+	}
 						
-				GPIO_PORTF_DATA_R &=~0x0E;	
-				complete();
-						
+	GPIO_PORTF_DATA_R &=~0x0E;	
+	complete();
+
 				
 }
