@@ -12,7 +12,7 @@ unsigned long calc(char arr[4])
 }
 void print_time (char time[4])
 	{
-	long j; //	counters
+	long j; //	counter
 	//// 	display minutes on LCD 	////
 	for(j=3; j>1; j--)
 	{
@@ -34,12 +34,13 @@ void Push_D()
 	
 	/////////		take inputs from Key bad and Disply it on LCD		/////////
 	Clear_LCD();		// clearing the LCD
-	LCD_data("Cooking Time?");
+	LCD_string("Cooking Time?");
 	delayms(2000); 		// 2 sec delay
 	Clear_LCD();		// clearing the LCD
 	print_time(time);	// 00 : 00
 	for(i=0; i< 4; i++)
 	{
+		/*
 		// SW 2 is pressed
 		if (Switch_Input (2) == 0) 
 		{
@@ -51,10 +52,10 @@ void Push_D()
 			i = -1; // return to first round
 			Clear_LCD(); // clear the lcd
 			time[4] = {'0', '0', '0', '0'}; 
-			print_time(time); // display 00:00
-			
+			print_time(time); // display 00:00	
 		}
-		time[0] = keypad_getkey; // new element is placed in t[o] --> (default : second)
+		*/
+		time[0] = keypad_input; // new element is placed in t[o] --> (default : second)
 		if (time[i] >= '0' && time[i] <= '9')	//time must be number
 		{
 			print_time(time);
@@ -68,12 +69,12 @@ void Push_D()
 		else
 		{
 			Clear_LCD();
-			LCD_data("error");
+			LCD_string("error");
 			delayms(2000);
 			Clear_LCD();
 			print_time(time);
 			i--;
 		}
 	}
-	delays_display(calc(time));
+	LCD_number(calc(time));
 }
