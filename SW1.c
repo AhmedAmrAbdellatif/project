@@ -14,39 +14,54 @@ EnableInterrupts();         // Enable global Interrupt flag (I)
 //Function////InProgress//
   
 void GPIOPortF_Handler(void){
+if(//SW3_released){
   if(GPIO_PORTF_MIS_R & 0x10)   //check if interrupt causes by PF4/SW1
   {     
     GPIO_PORTF_ICR_R = 0x10;   // clear the interrupt flag 
-    if(FallingEdges ==1 )      //FallingEdges is initialized by '0'
+    if(FallingEdges ==1 )      //pressed for the second time
     {
        FallingEdges =0;        //clear the counter
-       //stop();                
+       /*"stop cooking"
+	 NVIC_ST_CTRL_R &= ~0x1;
+	LCD_command(0x01); */		
 		}
-       else if((counter != 0) && (FallingEdges=0))  //check that in cooking state "for case D"
+       else if((FallingEdges=0) && (counter !=0))  //if pressed SW1 at (first time && during cooking)
        {
-         FallingEdges ++;     //FallingEdges=1
-         //pause();               //pause cooking
+	 
+         FallingEdges ++;                          //FallingEdges=1
+	 counter_handler=counter;
+           /*"pause cooking"
+	     NVIC_ST_CTRL_R &= ~0x01;
+	      LCD_command(0x01);
+	      LCD_data(counter)*/
        }
-	 else if((counter =0) && (FallingEdges=0))  //pressed SW1 in case 'D'
+	 else if((FallingEdges=0) && (counter=0))  //pressed SW1 in case 'D' before start cooking so counter is still = 0
 		 {
-		   LCD_command(0x01);  //clear
+		   /*LCD_command(0x01);*/
 		 }
 		 
 	 }
    else if (GPIO_PORTF_MIS_R & 0x01)   //check if interrupt causes by PF0/SW2
    {
-      GPIO_PORTF_ICR_R = 0x01;         // clear the interrupt flag 
-      if(FallingEdges ==1)              //to make sure that we are pasuing cooking
+      GPIO_PORTF_ICR_R = 0x01;         //clear the interrupt flag 
+      if(FallingEdges ==1)             //pressed SW2 in pausing state 
 	 {
-	 //resume();                       
+	 FallingEdges =0;
+	 /*"resume cooking"
+	  LCD_command(0x01);
+	   delays_display(counter);
+	   complete();*/   
+	      
 	 }
-	else if((FallingEdges =0) && //SW3 released) 
+	else if(FallingEdges ==0 && (calc(time) != 0))   
 		{
-			 delays_display(calc(time));     //start cooking for case 'D'
+			 /*start cooking for case 'D' 
+			 delays_display(calc(time));
+			 complete();*/    
 		 }
 			 
 	 }
-    
+ }
 
  
 
