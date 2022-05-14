@@ -53,7 +53,7 @@ if(/*SW3_released)*/) {
 	   complete();*/   
 	      
 	 }
-	else if(FallingEdges ==0 && (calc(time) != 0))   
+	else if(FallingEdges ==0 && (calc(time) != 0))   //pressed SW2 to start cooking for case 'D'
 		{
 			 /*"start cooking for case 'D' "
 			 delays_display(calc(time));
