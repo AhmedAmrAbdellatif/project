@@ -11,7 +11,7 @@ NVIC_EN0_R = 0x40000000;     // enable interrupt 30 "Port F" in NVIC
 EnableInterrupts();         // Enable global Interrupt flag (I)
 
 
-//pasue - resume ////InProgress//  
+//pause - resume ////InProgress//  
 void GPIOPortF_Handler(void){
 		if(GPIO_PORTF_MIS_R & 0x10){
 	while((GPIO_PORTF_DATA_R & 0x01)==1){
