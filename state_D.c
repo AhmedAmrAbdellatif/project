@@ -33,14 +33,14 @@ void PushD()
 	long i, j; //	counters
 	
 	/////////		take inputs from Key bad and Disply it on LCD		/////////
-	Clear_LCD();		// clearing the LCD
+	clear_LCD();		// clearing the LCD
 	LCD_string("Cooking Time?");
-	delayms(2000); 		// 2 sec delay
-	Clear_LCD();		// clearing the LCD
+	delayms(500); 		// 2 sec delay
+	clear_LCD();		// clearing the LCD
 	print_time(time);	// 00 : 00
 	for(i=0; i< 4; i++)
 	{
-		/*
+		
 		// SW 2 is pressed
 		if (Switch_Input (2) == 0) 
 		{
@@ -50,14 +50,14 @@ void PushD()
 		if (Switch_Input (1) == 0) 
 		{
 			i = -1; // return to first round
-			Clear_LCD(); // clear the lcd
+			clear_LCD(); // clear the lcd
 			time[4] = {'0', '0', '0', '0'}; 
 			print_time(time); // display 00:00	
 		}
-		*/
-		time[0] = keypad_input; // new element is placed in t[o] --> (default : second)
+		time[0] = keypad_input(); // new element is placed in t[o] --> (default : second)
 		if (time[i] >= '0' && time[i] <= '9')	//time must be number
 		{
+			clear_LCD();
 			print_time(time);
 			////	  shifting elements of time array	////
 			for(j=i; j>=0 && (i+1<4); j--) //stop when you reach t[0] or t[3]
@@ -68,10 +68,10 @@ void PushD()
 		// wrong input	 print error for 2 sec then retake this input & decrement i
 		else
 		{
-			Clear_LCD();
+			clear_LCD();
 			LCD_string("error");
 			delayms(2000);
-			Clear_LCD();
+			clear_LCD();
 			print_time(time);
 			i--;
 		}
