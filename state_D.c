@@ -54,6 +54,7 @@ void PushD()
 			time[4] = {'0', '0', '0', '0'}; 
 			print_time(time); // display 00:00	
 		}
+		while(time[0] ==  keypad_input());
 		time[0] = keypad_input(); // new element is placed in t[o] --> (default : second)
 		if (time[i] >= '0' && time[i] <= '9')	//time must be number
 		{
