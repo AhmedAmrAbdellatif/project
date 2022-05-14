@@ -6,14 +6,14 @@ char keypad_check()
  	while(1)		
 	{
 		for(check_counter = 0; check_counter < 4; check_counter++)	//scan rows
-				{
-					if( (GPIO_PORTE_DATA_R & 0x1E) & (1 << (check_counter+1) ) )
-					{
-						checker = 0;
-						return checker;
-					}
-					
-				}
+		{
+			if( (GPIO_PORTE_DATA_R & 0x1E) & (1 << (check_counter+1) ) )
+			{
+				checker = 0;
+				return checker;
+			}
+
+		}
 	}
 }
 
