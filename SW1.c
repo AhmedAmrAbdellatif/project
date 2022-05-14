@@ -55,7 +55,7 @@ if(/*SW3_released)*/) {
 	 }
 	else if(FallingEdges ==0 && (calc(time) != 0))   
 		{
-			 /*start cooking for case 'D' 
+			 /*"start cooking for case 'D' "
 			 delays_display(calc(time));
 			 complete();*/    
 		 }
