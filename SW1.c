@@ -22,11 +22,15 @@ void GPIOPortF_Handler(void){
        RisingEdges =0;        //clear the counter
        stop();                
 		}
-       else
+       else if(counter != 0 && RisingEdges=0)  //check that in cooking state "for case D"
        {
          RisingEdges ++;     //RisingEdges=1
          pause();               //pause cooking
        }
+			 else if(counter =0 && RisingEdges=0)  //pressed SW1 in case 'D'
+			 {
+				 LCD_command(0x01);  //clear
+			 }
 		 
 	 }
    else if (GPIO_PORTF_MIS_R & 0x01)   //check if interrupt causes by PF0/SW2
@@ -36,9 +40,12 @@ void GPIOPortF_Handler(void){
 		 {
 			 resume();                       
 		 }
+		 else if(RisingEdges =0 && //SW3 released) 
+		 {
+			 delays_display(calc(time));     //start cooking for case 'D'
+		 }
+			 
 	 }
-	
-	}
     
 
  
