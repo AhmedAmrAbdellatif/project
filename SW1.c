@@ -14,6 +14,45 @@ EnableInterrupts();         // Enable global Interrupt flag (I)
 //Function////InProgress//
   
 void GPIOPortF_Handler(void){
+		if(GPIO_PORTF_MIS_R & 0x10){
+	while((GPIO_PORTF_DATA_R & 0x01)==1){
+		
+	GPIO_PORTF_ICR_R = 0x10;
+	blinks();
+		
+	}
+}
+		else if(GPIO_PORTF_MIS_R & 0x01){
+			GPIO_PORTF_ICR_R = 0x01;
+			
+			
+		}
+}
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*void GPIOPortF_Handler(void){
 SW3_button = Switch_Input(3);
 if(SW3_button == 1) {            //check that the door is closed 
   if(GPIO_PORTF_MIS_R & 0x10)   //check if interrupt causes by PF4/SW1
@@ -64,7 +103,7 @@ if(SW3_button == 1) {            //check that the door is closed
 	 }
  }
 else if(SW3_button == 0){}     //the door is open
-}
+}*/
 
 
 
