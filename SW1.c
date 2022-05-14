@@ -20,12 +20,12 @@ void GPIOPortF_Handler(void){
     if(FallingEdges ==1 )      //FallingEdges is initialized by '0'
     {
        FallingEdges =0;        //clear the counter
-       stop();                
+       //stop();                
 		}
        else if((counter != 0) && (FallingEdges=0))  //check that in cooking state "for case D"
        {
          FallingEdges ++;     //FallingEdges=1
-         pause();               //pause cooking
+         //pause();               //pause cooking
        }
 	 else if((counter =0) && (FallingEdges=0))  //pressed SW1 in case 'D'
 		 {
@@ -38,7 +38,7 @@ void GPIOPortF_Handler(void){
       GPIO_PORTF_ICR_R = 0x01;         // clear the interrupt flag 
       if(FallingEdges ==1)              //to make sure that we are pasuing cooking
 	 {
-	 resume();                       
+	 //resume();                       
 	 }
 	else if((FallingEdges =0) && //SW3 released) 
 		{
