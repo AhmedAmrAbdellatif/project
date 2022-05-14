@@ -45,7 +45,7 @@ void SystemInit(){};
 
 void LCD_init()
 {
-	SYSCTL_RCGCGPIO_R |= 0x03; // PortA (Pin 5:RS)(Pin 6:R/W)(Pin 7:EN) & PortB (Pin 0-7:D0-7)
+	SYSCTL_RCGCGPIO_R |= 0x03; // PortA (Pin 5:RS)(Pin 7:EN) & PortB (Pin 0-7:D0-7)
 	while((SYSCTL_PRGPIO_R&0x03) == 0){}
 	GPIO_PORTB_LOCK_R = 0x4C4F434B;
 	GPIO_PORTB_CR_R = 0xFF;
@@ -73,7 +73,6 @@ void LCD_init()
 
 void LCD_data(unsigned char data)
 {
-	//GPIO_PORTA_DATA_R &= ~0x40; 		// R/W will be connected to the GND externally
 	GPIO_PORTA_DATA_R |= 0x20; 		// RS = 1
 	delayms(2);
 	GPIO_PORTA_DATA_R |= 0x80; 		// EN = 1
