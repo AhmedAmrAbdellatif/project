@@ -5,7 +5,7 @@ char keypad_check()
 	char checker = 1;
  	while(1)		
 	{
-		for(int check_counter = 0; check_counter < 4; check_counter++)	//scan rows
+		for(check_counter = 0; check_counter < 4; check_counter++)	//scan rows
 				{
 					if( (GPIO_PORTE_DATA_R & 0x1E) & (1 << (check_counter+1) ) )
 					{
