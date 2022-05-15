@@ -1,6 +1,6 @@
-/*unsigned char sw1 (){return GPIO_PORTF_DATA_R & 0x10;}
+unsigned char sw1 (){return GPIO_PORTF_DATA_R & 0x10;}
 unsigned char sw2 (){return GPIO_PORTF_DATA_R & 0x01;}
-unsigned char sw3 (){return GPIO_PORTE_DATA_R & 0x01;}*/
+unsigned char sw3 (){return GPIO_PORTE_DATA_R & 0x01;}
 
 
 
@@ -9,17 +9,17 @@ char time_temp;
 ////	calculating cooking time in secends	////
 unsigned long calc(char arr[4])
 {
-    unsigned long duration = 0;
-    long i;
-    for (i = 0; i<4 ;i++)	// convert from char --> number
-    {
-        arr [i]= (arr[i] - '0');
-    }
-    duration = arr[0] + arr[1]*10 + arr[2]*60 + arr[3]*600;
-    return duration;
+	unsigned long duration = 0;
+	long i;
+	for (i = 0; i<4 ;i++)	// convert from char --> number
+	{
+		arr [i]= (arr[i] - '0');
+	}
+	duration = arr[0] + arr[1]*10 + arr[2]*60 + arr[3]*600;
+	return duration;
 }
 void print_time (char time[4])
-	{
+{
 	long j; //	counter
 	//// 	display minutes on LCD 	////
 	for(j=3; j>1; j--)
@@ -36,8 +36,8 @@ void print_time (char time[4])
 	}
 }
 	
-			long kk;
-			long pushd_time;
+long kk;
+long pushd_time;
 
 void pushD()
 {
@@ -51,7 +51,7 @@ void pushD()
 	clear_LCD;
 	delayms(2);
 
-	/////////		take inputs from Key bad and Disply it on LCD		/////////
+	/////////    take inputs from Key bad and Disply it on LCD	/////////
 	clear_LCD;		// clearing the LCD
 	LCD_string("Cooking Time?");
 	delayms(1000); 		// 1 sec delay
@@ -68,7 +68,6 @@ void pushD()
 		// SW 1 is pressed
 		if (sw1 () != 0x10) 
 		{
-
 			i = -1; // return to first round
 			clear_LCD; // clear the lcd
 		
@@ -104,7 +103,8 @@ void pushD()
 			i--;
 		}
 	}
-	start_cooking_d: clear_LCD;
+start_cooking_d:
+	clear_LCD;
 	EnableInterrupts();
 	pushd_time = calc(time);
 	LCD_number( pushd_time );
