@@ -58,7 +58,7 @@ void pushD()
 	char time[4] = {'0', '0', '0', '0'};	//	time array = 00 : 00
 	long i, j; //	counters
 
-	DisableInterrupts();
+	//DisableInterrupts();
 	
 	LCD_data('D');
 	delayms(500);
@@ -77,11 +77,13 @@ void pushD()
 		// SW 2 is pressed
 		if (switch_2) 
 		{
+			switch_2 = false;
 			break;						
 		}
 		// SW 1 is pressed
 		if (switch_1) 
 		{
+			switch_1 = false;
 			i = -1; // return to first round
 			clear_LCD; // clear the lcd
 			for (kk=0; kk<4 ; kk++)
@@ -92,7 +94,7 @@ void pushD()
 		}
 		
 		time_temp = keypad_input();
-		delayms(200);
+		delayms(300);
 		if (time_temp >= '0' && time_temp <= '9')	//time must be number
 		{
 			////	  shifting elements of time array	////
@@ -107,8 +109,10 @@ void pushD()
 		// wrong input	 print error for 2 sec then retake this input & decrement i
 		else
 		{
+			if (switch_2 == true) goto start_cooking_d;
+			if (switch_1 == true) continue;
 			clear_LCD;
-			LCD_string("error");
+			LCD_string("Error");
 			delayms(2000);
 			clear_LCD;
 			print_time(time);
@@ -117,7 +121,7 @@ void pushD()
 	}
 start_cooking_d:
 	clear_LCD;
-	EnableInterrupts();
+	//EnableInterrupts();
 	pushd_time = calc(time);
 	LCD_number( pushd_time );
 	LCD_string(" seconds");
@@ -131,17 +135,21 @@ start_cooking_d:
 	clear_LCD;
 	
 	LED_ON;
-					
-	for (countdown=pushd_time;countdown>0;countdown--)
+	
+	delay_display_complete(pushd_time);
+	
+	/*for (countdown=pushd_time;countdown>0;countdown--)
 	{
 		LED_ON;	
 		LCD_number(countdown);
 		delayms(1000);
 		clear_LCD;
-	}
+	}*/
 						
 	GPIO_PORTF_DATA_R &=~0x0E;	
 	complete();
+	switch_2 = false;
+	switch_1 = false;
 
 				
 }
