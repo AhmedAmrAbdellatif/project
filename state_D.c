@@ -5,7 +5,19 @@ unsigned char sw3 (){return GPIO_PORTE_DATA_R & 0x01;}
 bool switch_2 = 0;
 bool switch_1 = 0;
 
-
+// SW 2 is pressed
+if (sw2 () == 0) 
+{
+	switch_2 = 1;
+	break;						
+}
+// SW 1 is pressed
+if (sw1 () == 0) 
+{
+	switch_1 = 1;
+	break;	
+}
+	
 char time_temp;
 		
 ////	calculating cooking time in secends	////
