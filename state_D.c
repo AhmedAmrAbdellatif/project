@@ -2,6 +2,8 @@ unsigned char sw1 (){return GPIO_PORTF_DATA_R & 0x10;}
 unsigned char sw2 (){return GPIO_PORTF_DATA_R & 0x01;}
 unsigned char sw3 (){return GPIO_PORTE_DATA_R & 0x01;}
 
+bool switch_2 = 0;
+bool switch_1 = 0;
 
 
 char time_temp;
@@ -61,12 +63,12 @@ void pushD()
 	for(i=0; i< 4; i++)
 	{
 		// SW 2 is pressed
-		if (sw2 () == 0) 
+		if (switch_2) 
 		{
 			break;						
 		}
 		// SW 1 is pressed
-		if (sw1 () == 0) 
+		if (switch_1) 
 		{
 			i = -1; // return to first round
 			clear_LCD; // clear the lcd
