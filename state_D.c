@@ -61,17 +61,15 @@ void pushD()
 	for(i=0; i< 4; i++)
 	{
 		// SW 2 is pressed
-		if (sw2 () != 0x01) 
+		if (sw2 () == 0) 
 		{
 			break;						
 		}
 		// SW 1 is pressed
-		if (sw1 () != 0x10) 
+		if (sw1 () == 0) 
 		{
 			i = -1; // return to first round
 			clear_LCD; // clear the lcd
-		
-
 			for (kk=0; kk<4 ; kk++)
 			{
 			time[kk] = '0';
