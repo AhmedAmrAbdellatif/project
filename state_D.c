@@ -4,20 +4,6 @@ unsigned char sw3 (){return GPIO_PORTE_DATA_R & 0x01;}
 
 bool switch_2 = 0;
 bool switch_1 = 0;
-
-// SW 2 is pressed
-if (sw2 () == 0) 
-{
-	switch_2 = 1;
-	break;						
-}
-// SW 1 is pressed
-if (sw1 () == 0) 
-{
-	switch_1 = 1;
-	break;	
-}
-	
 char time_temp;
 		
 ////	calculating cooking time in secends	////
@@ -32,73 +18,45 @@ unsigned long calc(char arr[4])
 	duration = arr[0] + arr[1]*10 + arr[2]*60 + arr[3]*600;
 	return duration;
 }
+////	 minutes : seconds	////
 void print_time (char time[4])
 {
 	long j; //	counter
-	//// 	display minutes on LCD 	////
-	for(j=3; j>1; j--)
+	for(j=3; j>1; j--) 	// minutes
 	{
 		LCD_data(time[j]); 
 	}
 
 	LCD_data(':'); 
 
-	//// 	display seconds on LCD 	////
-	for(j=1; j>= 0; j--)
+	
+	for(j=1; j>= 0; j--)	// seconds
 	{
 		LCD_data(time[j]); 
 	}
 }
 	
 long kk;
-long pushd_time;
+long pushd_time; 
 
 void pushD()
 {
 	char time[4] = {'0', '0', '0', '0'};	//	time array = 00 : 00
 	long i, j; //	counters
-
-	//DisableInterrupts();
-	
 	LCD_data('D');
 	delayms(500);
 	clear_LCD;
 	delayms(2);
-
-	/////////    take inputs from Key bad and Disply it on LCD	/////////
-	clear_LCD;		// clearing the LCD
+	clear_LCD;	
 	LCD_string("Cooking Time?");
-	delayms(1000); 		// 1 sec delay
-	clear_LCD;		// clearing the LCD
-	
+	delayms(1000); 
+take_input:
+	clear_LCD;	
 	print_time(time);	// 00 : 00
+	
 	for(i=0; i< 4; i++)
 	{	
 		time_temp = keypad_input();
-		delayms(300);
-		if (time_temp >= '0' && time_temp <= '9')	//time must be number
-		{
-			////	  shifting elements of time array	////
-			for(j=i-1; j>=0; j--) 
-			{
-				time[j+1] = time[j];	// 10 minutes <--- 10 minutes <--- 10 Seconds <--- Seconds
-			}
-			time[0] = time_temp;
-			clear_LCD;
-			print_time(time);
-		}
-		// wrong input	 print error for 2 sec then retake this input & decrement i
-		else
-		{
-			if (switch_2 == true) goto start_cooking_d;
-			if (switch_1 == true) continue;
-			clear_LCD;
-			LCD_string("Error");
-			delayms(2000);
-			clear_LCD;
-			print_time(time);
-			i--;
-		}
 		// SW 2 is pressed
 		if (switch_2) 
 		{
@@ -116,12 +74,44 @@ void pushD()
 			time[kk] = '0';
 			}
 			print_time(time); // display 00:00	
+			continue;
+		}
+		delayms(300);
+		if (time_temp >= '0' && time_temp <= '9')	//time must be number
+		{
+			
+			for(j=i-1; j>=0; j--) // shifting elements of time array before new entry 
+			{
+				time[j+1] = time[j];	// 10 minutes <--- 10 minutes <--- 10 Seconds <--- Seconds
+			}
+			
+			time[0] = time_temp; // new entry is second by defualt
+			clear_LCD;
+			print_time(time);
+		}
+		// wrong input	 print error for 2 sec then retake this input & decrement i
+		else
+		{
+			if (switch_2 == true) goto start_cooking_d;
+			if (switch_1 == true) continue;
+			clear_LCD;
+			LCD_string("Error");
+			delayms(2000);
+			clear_LCD;
+			print_time(time);
+			i--;
 		}
 	}
 start_cooking_d:
 	clear_LCD;
-	//EnableInterrupts();
 	pushd_time = calc(time);
+	if (pushd_time > 1800) // maximum time 30 minutes = 1800 sec
+	{
+		clear_LCD;
+		LCD_string("Error");
+		delayms(2000);
+		goto take_input;
+	}
 	LCD_number( pushd_time );
 	LCD_string(" seconds");
 
