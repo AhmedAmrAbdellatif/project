@@ -1,0 +1,3 @@
+enum state {Idle0 ,popcorn1 ,beef2 ,chicken3 ,chooseTime4 ,countdown5 ,selectWeight6 , writeTime7 ,pause8 ,cont9}
+
+
