@@ -65,6 +65,13 @@ void FSM()
     
     s7:
        if(i3==1 & i2==0){state=s8;}
+       break;
+       
+    s8:O0=V4
+       if(i1==0){state=s7; V4=O1;}
+       if(i3==0){state=s7; V4=O1;}
+       if(O1=0){state=s0;}
+       break;
     
     }
   }
