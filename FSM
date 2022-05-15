@@ -1,5 +1,5 @@
 enum s{Idle0 ,popcorn1 ,beef2 ,chicken3 ,chooseTime4 ,selectWeight5 , writeTime6 ,pause7 } //state
-enum i{keypad input0 , sw11,sw22,sw33}  //input
+enum i{keypad input0 , sw11 ,sw22 ,sw33 ,}  //input
 enum O{LCD_display0 ,countdown1}  //output
 enum V{weightSelected_B0 ,weightSelected_C0}  //variable
 
@@ -7,7 +7,7 @@ enum V{weightSelected_B0 ,weightSelected_C0}  //variable
 
 void FSM()
 {
-  state = s0; //(=idle)
+  int state = s0; //(=idle)
   while(1)
   {
     switch(state)
@@ -40,11 +40,17 @@ void FSM()
         
      s4:i0='D';
         O0='cookingTime?';
+        state=s6;
+        break;
         
-        
-        
+     s5:V0=i0
+        V1=i0
+        V0 *= 30
+        V1 *= 12
+        if(i0=V0)
         if(i1==0){state=s7;}
         if(i3==0){state=s7;}
+        if(O1=0){state=s0;}
     
     
     }
