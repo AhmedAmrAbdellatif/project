@@ -73,26 +73,7 @@ void pushD()
 	
 	print_time(time);	// 00 : 00
 	for(i=0; i< 4; i++)
-	{
-		// SW 2 is pressed
-		if (switch_2) 
-		{
-			switch_2 = false;
-			break;						
-		}
-		// SW 1 is pressed
-		if (switch_1) 
-		{
-			switch_1 = false;
-			i = -1; // return to first round
-			clear_LCD; // clear the lcd
-			for (kk=0; kk<4 ; kk++)
-			{
-			time[kk] = '0';
-			}
-			print_time(time); // display 00:00	
-		}
-		
+	{	
 		time_temp = keypad_input();
 		delayms(300);
 		if (time_temp >= '0' && time_temp <= '9')	//time must be number
@@ -117,6 +98,24 @@ void pushD()
 			clear_LCD;
 			print_time(time);
 			i--;
+		}
+		// SW 2 is pressed
+		if (switch_2) 
+		{
+			switch_2 = false;
+			break;						
+		}
+		// SW 1 is pressed
+		if (switch_1) 
+		{
+			switch_1 = false;
+			i = -1; // return to first round
+			clear_LCD; // clear the lcd
+			for (kk=0; kk<4 ; kk++)
+			{
+			time[kk] = '0';
+			}
+			print_time(time); // display 00:00	
 		}
 	}
 start_cooking_d:
