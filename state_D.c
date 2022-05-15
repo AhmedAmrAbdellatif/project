@@ -1,3 +1,11 @@
+/*unsigned char sw1 (){return GPIO_PORTF_DATA_R & 0x10;}
+unsigned char sw2 (){return GPIO_PORTF_DATA_R & 0x01;}
+unsigned char sw3 (){return GPIO_PORTE_DATA_R & 0x01;}*/
+
+
+
+char time_temp;
+		
 ////	calculating cooking time in secends	////
 unsigned long calc(char arr[4])
 {
@@ -11,22 +19,26 @@ unsigned long calc(char arr[4])
     return duration;
 }
 void print_time (char time[4])
-{
+	{
 	long j; //	counter
 	//// 	display minutes on LCD 	////
 	for(j=3; j>1; j--)
 	{
-		LCD_data(time[j]);
+		LCD_data(time[j]); 
 	}
 
-	LCD_data(':');
+	LCD_data(':'); 
 
 	//// 	display seconds on LCD 	////
 	for(j=1; j>= 0; j--)
 	{
-		LCD_data(time[j]);
+		LCD_data(time[j]); 
 	}
 }
+	
+			long kk;
+			long pushd_time;
+
 void pushD()
 {
 	char time[4] = {'0', '0', '0', '0'};	//	time array = 00 : 00
@@ -49,12 +61,12 @@ void pushD()
 	for(i=0; i< 4; i++)
 	{
 		// SW 2 is pressed
-		if (Switch_Input (2) != 0x01) 
+		if (sw2 () != 0x01) 
 		{
 			break;						
 		}
 		// SW 1 is pressed
-		if (Switch_Input (1) != 0x10) 
+		if (sw1 () != 0x10) 
 		{
 
 			i = -1; // return to first round
@@ -68,8 +80,8 @@ void pushD()
 			print_time(time); // display 00:00	
 		}
 		
-		char time_temp = keypad_input();
-		delayms(100);
+		time_temp = keypad_input();
+		delayms(200);
 		if (time_temp >= '0' && time_temp <= '9')	//time must be number
 		{
 			////	  shifting elements of time array	////
@@ -78,21 +90,21 @@ void pushD()
 				time[j+1] = time[j];	// 10 minutes <--- 10 minutes <--- 10 Seconds <--- Seconds
 			}
 			time[0] = time_temp;
-			clear_LCD();
+			clear_LCD;
 			print_time(time);
 		}
 		// wrong input	 print error for 2 sec then retake this input & decrement i
 		else
 		{
-			clear_LCD();
-			cout <<("error");
+			clear_LCD;
+			LCD_string("error");
 			delayms(2000);
-			clear_LCD();
+			clear_LCD;
 			print_time(time);
 			i--;
 		}
 	}
-	clear_LCD;
+	start_cooking_d: clear_LCD;
 	EnableInterrupts();
 	pushd_time = calc(time);
 	LCD_number( pushd_time );
@@ -106,11 +118,11 @@ void pushD()
 	delayms(1000);
 	clear_LCD;
 	
-	GPIO_PORTF_DATA_R |=0x0E;
+	LED_ON;
 					
 	for (countdown=pushd_time;countdown>0;countdown--)
 	{
-		GPIO_PORTF_DATA_R |=0x0E;	
+		LED_ON;	
 		LCD_number(countdown);
 		delayms(1000);
 		clear_LCD;
@@ -121,3 +133,4 @@ void pushD()
 
 				
 }
+		
