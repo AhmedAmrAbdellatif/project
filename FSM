@@ -1,7 +1,7 @@
-enum s{Idle0 ,popcorn1 ,beef2 ,chicken3 ,chooseTime4 ,selectWeight5 , writeTime6 ,pause7 } //state
+enum s{Idle0 ,popcorn1 ,beef2 ,chicken3 ,chooseTime4 ,selectWeight5 , writeTime6 ,pause7 ,cont_count8} //state
 enum i{keypad input0 , sw11 ,sw22 ,sw33 ,}  //input
 enum O{LCD_display0 ,countdown1}  //output
-enum V{weightSelected_B0 ,weightSelected_C0}  //variable
+enum V{weightSelected_B0 ,totalTime_B1 ,totalTime_C2, beef_OR_chicken3, counter4}  //variable
 
 
 
@@ -23,17 +23,19 @@ void FSM()
       s1:i0='A';                 //keypad_input
          O0='popcorn'
          O1=60;                //countdown
-         if(i1==0){state=s7;}
-         if(i3==0){state=s7;}
+         if(i1==0){state=s7; V4=O1}
+         if(i3==0){state=s7;V4=O1}
          if(O1=0){state=s0;}
          break;
      
      s2:i0='B';
+        v3='B'
         O0='beef'
         state=s5;
         break;
         
      s3:i0='C';
+        v3=B
         O0='chicken'
         state=s5;
         break;
@@ -44,14 +46,25 @@ void FSM()
         break;
         
      s5:V0=i0
-        V1=i0
-        V0 *= 30
-        V1 *= 12
-        if(i0=V0)
-        if(i1==0){state=s7;}
-        if(i3==0){state=s7;}
+        V1= V0 * 30;
+        V2= V1 * 12;
+        if(v3=='B'){O0=V1;}
+          else{O0=v2;}
+        if(V0==0|V0>9){state=s5; break;}
+        if(i1==0){state=s7; V4=O1;}
+        if(i3==0){state=s7; V4=O1;}
         if(O1=0){state=s0;}
+        break;
+        
+        
+     s6:
+        if(i1==0){state=s6;}
+        if(i3==0){state=s7; V4=O1;}
+        if(O1=0){state=s0;}
+        break:
     
+    s7:
+       if(i3==1 & i2==0){state=s8;}
     
     }
   }
