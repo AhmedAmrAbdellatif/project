@@ -1,13 +1,19 @@
-enum state {Idle0 ,popcorn1 ,beef2 ,chicken3 ,chooseTime4 ,countdown5 ,selectWeight6 , writeTime7 ,pause8 }
-
+enum s{Idle0 ,popcorn1 ,beef2 ,chicken3 ,chooseTime4 ,countdown5 ,selectWeight6 , writeTime7 ,pause8 }
+enum i{keypad input}
+enum O{}
 void FSM()
 {
-  state = 0 //(=idle)
+  state = 0; //(=idle)
   while(1)
   {
     switch(state)
     {
+      s0:i0=0; i2=0
+       O1='Enter choice';      //lcd_display 
+       break
       
+      s1:i0=A;                 //keypad_input
+        i2=60;                //countdown
     
     
     
