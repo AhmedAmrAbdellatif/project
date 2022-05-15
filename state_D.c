@@ -1,38 +1,15 @@
-
-long check_counter;
-char keypad_check()					
-{
-	char checker = 1;
- 	while(1)		
-	{
-		for(check_counter = 0; check_counter < 4; check_counter++)	//scan rows
-		{
-			if( (GPIO_PORTE_DATA_R & 0x1E) & (1 << (check_counter+1) ) )
-			{
-				checker = 0;
-				return checker;
-			}
-
-		}
-	}
-}
-
-
 void pushD()
 {
-	
-	
-
 	char time[4] = {'0', '0', '0', '0'};	//	time array = 00 : 00
 	long i, j; //	counters
-	
+
 	DisableInterrupts();
 	
-		LCD_data('D');
-		delayms(500);
-		clear_LCD;
-		delayms(2);
-	
+	LCD_data('D');
+	delayms(500);
+	clear_LCD;
+	delayms(2);
+
 	/////////		take inputs from Key bad and Disply it on LCD		/////////
 	clear_LCD;		// clearing the LCD
 	LCD_string("Cooking Time?");
@@ -42,7 +19,6 @@ void pushD()
 	print_time(time);	// 00 : 00
 	for(i=0; i< 4; i++)
 	{
-		
 		// SW 2 is pressed
 		if (Switch_Input (2) != 0x01) 
 		{
@@ -63,48 +39,30 @@ void pushD()
 			print_time(time); // display 00:00	
 		}
 		
-		
-		while(keypad_check());
-		
+		char time_temp = keypad_input();
+		delayms(100);
+		if (time_temp >= '0' && time_temp <= '9')	//time must be number
+		{
 			////	  shifting elements of time array	////
-			for(j=i; j>=0 && (i<4); j--) //stop when you reach t[0] or t[3]
+			for(j=i-1; j>=0; j--) 
 			{
 				time[j+1] = time[j];	// 10 minutes <--- 10 minutes <--- 10 Seconds <--- Seconds
 			}
-			
-		time[0] = keypad_input(); // new element is placed in t[o] --> (default : second)
-			
-		
-			
-		if (time[0] >= '0' && time[0] <= '9')	//time must be number
-		{
-			clear_LCD;
+			time[0] = time_temp;
+			clear_LCD();
 			print_time(time);
 		}
 		// wrong input	 print error for 2 sec then retake this input & decrement i
 		else
 		{
-			clear_LCD;
-			LCD_string("Error");
-			time[0] = time[1];
-			time[1] = time[2];
-			time[2] = time[3];
-			
-			if (i==3) {time[3] ='0';}
-			
+			clear_LCD();
+			cout <<("error");
 			delayms(2000);
-			clear_LCD;
-			
+			clear_LCD();
 			print_time(time);
 			i--;
 		}
 	}
-	
-	clear_LCD;
-	
-	print_time(time);
-	delayms(500);
-	
 	clear_LCD;
 	EnableInterrupts();
 	pushd_time = calc(time);
