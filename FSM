@@ -2,12 +2,16 @@ enum state {Idle0 ,popcorn1 ,beef2 ,chicken3 ,chooseTime4 ,countdown5 ,selectWei
 
 void FSM()
 {
-  state = 0 
+  state = 0 //(=idle)
   while(1)
   {
     switch(state)
-  
-  
-  
+    {
+      
+    
+    
+    
+    
+    }
   }
 }
