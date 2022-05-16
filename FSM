@@ -1,7 +1,8 @@
 enum s{Idle0 ,popcorn1 ,beef2 ,chicken3 ,chooseTime4 ,selectWeight5 , writeTime6 ,pause7 ,cont_count8} //state
-enum i{keypad input0 , sw11 ,sw22 ,sw33 ,}  //input
-enum O{LCD_display0 ,countdown1}  //output
-enum V{weightSelected_B0 ,totalTime_B1 ,totalTime_C2, beef_OR_chicken3, counter4}  //variable
+
+Inputs{keypad_input , sw1 ,sw2 ,sw3}  //input
+outputs{LCD_display ,countdown}  //output
+variables{weightSelected ,totalTime_B ,totalTime_C, beefORchicken, counter}  //variable
 
 
 
@@ -39,8 +40,8 @@ void FSM()
         state=5;
         break;
         
-     4: i0='D';
-        O0='cookingTime?';
+     4: 
+        LCD_display='cookingTime?';
         state=6;
         break;
         
@@ -67,7 +68,8 @@ void FSM()
       if(sw3_cheak==1 & sw2_check==0){state=s8;}
       break;
        
-    8:countdown=counter;
+    8:
+      countdown = counter;
       if(sw1_check==0){state=7; counter=countdown;}
       if(sw3_check==0){state=7; counter=countdown;}
       if(countdown=0){state=0;}
