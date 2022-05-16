@@ -15,10 +15,10 @@ void FSM()
     {
       0:
          LCD_display='Enter choice';      //lcd_display 
-         if(Keypad_input='A'){state=s1;}
-         if(Keypad_input='B'){state=s2;}
-         if(Keypad_input='C'){state=s3;}
-         if(Keypad_input='D'){state=s4;}
+         if(Keypad_input='A'){state=1;}
+         if(Keypad_input='B'){state=2;}
+         if(Keypad_input='C'){state=3;}
+         if(Keypad_input='D'){state=4;}
          break;
       
       1: i0='A';                 //keypad_input
