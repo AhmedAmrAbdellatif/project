@@ -41,7 +41,7 @@ void FSM()
         
      4: i0='D';
         O0='cookingTime?';
-        state=s6;
+        state=6;
         break;
         
      5:
@@ -58,19 +58,19 @@ void FSM()
         
         
      6:
-       if(i1==0){state=s6;}
-       if(i3==0){state=s7; V4=O1;}
-       if(O1=0){state=s0;}
+       if(sw1_check==0){state=6; break;}
+       if(sw3_check==0){state=7; counter=countdown;}
+       if(countdown=0){state=0;}
        break:
     
     7:
-      if(i3==1 & i2==0){state=s8;}
+      if(sw3_cheak==1 & sw2_check==0){state=s8;}
       break;
        
-    8:O1=V4
-      if(i1==0){state=s7; V4=O1;}
-      if(i3==0){state=s7; V4=O1;}
-      if(O1=0){state=s0;}
+    8:countdown=counter;
+      if(sw1_check==0){state=7; counter=countdown;}
+      if(sw3_check==0){state=7; counter=countdown;}
+      if(countdown=0){state=0;}
       break;
     
     }
