@@ -43,12 +43,12 @@
 		{
 			case 'B' :
 			LCD_data('Beef Weight?');
-			//while(keypad doesn't pressed) {};
+			while ( !(GPIO_PORTE_DATA_R & 0x1E) );
 			desired_weight('B', keypad_input);
 			break;
 			case 'C' :
 			LCD_data('Chicken Weight?');
-			//while(keypad doesn't pressed) {};
+			while ( !(GPIO_PORTE_DATA_R & 0x1E) );
 			desired_weight('C', keypad_input);
 			break;
 		}
