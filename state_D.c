@@ -105,7 +105,7 @@ take_input:
 start_cooking_d:
 	clear_LCD;
 	pushd_time = calc(time);
-	if (pushd_time > 1800) // maximum time 30 minutes = 1800 sec
+	if (pushd_time > 1800 || pushd_time < 1) // maximum time 30 minutes = 1800 sec minimum time 1 second 
 	{
 		clear_LCD;
 		LCD_string("Error");
