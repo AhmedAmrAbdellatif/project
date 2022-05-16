@@ -7,20 +7,20 @@ enum V{weightSelected_B0 ,totalTime_B1 ,totalTime_C2, beef_OR_chicken3, counter4
 
 void FSM()
 {
-  int state = s0; //(=idle)
+  enum s state = 0; //(=idle)
   while(1)
   {
     switch(state)
     {
-      s0:i3=1
-         O0='Enter choice';      //lcd_display 
-         if(i0='A'){state=s1;}
-         if(i0='B'){state=s2;}
-         if(i0='C'){state=s3;}
-         if(i0='D'){state=s4;}
+      0:
+         LCD_display='Enter choice';      //lcd_display 
+         if(Keypad_input='A'){state=s1;}
+         if(Keypad_input='B'){state=s2;}
+         if(Keypad_input='C'){state=s3;}
+         if(Keypad_input='D'){state=s4;}
          break;
       
-      s1:i0='A';                 //keypad_input
+      1:i0='A';                 //keypad_input
          O0='popcorn'
          O1=60;                //countdown
          if(i1==0){state=s7; V4=O1}
@@ -28,50 +28,50 @@ void FSM()
          if(O1=0){state=s0;}
          break;
      
-     s2:i0='B';
+     2:i0='B';
         v3='B'
         O0='beef'
         state=s5;
         break;
         
-     s3:i0='C';
+     3:i0='C';
         v3=B
         O0='chicken'
         state=s5;
         break;
         
-     s4:i0='D';
-        O0='cookingTime?';
-        state=s6;
-        break;
-        
-     s5:V0=i0
-        V1= V0 * 30;
-        V2= V1 * 12;
-        if(v3=='B'){O0=V1;}
-          else{O0=v2;}
-        if(V0==0|V0>9){state=s5; break;}
-        if(i1==0){state=s7; V4=O1;}
-        if(i3==0){state=s7; V4=O1;}
-        if(O1=0){state=s0;}
-        break;
-        
-        
-     s6:
-        if(i1==0){state=s6;}
-        if(i3==0){state=s7; V4=O1;}
-        if(O1=0){state=s0;}
-        break:
-    
-    s7:
-       if(i3==1 & i2==0){state=s8;}
+     4:i0='D';
+       O0='cookingTime?';
+       state=s6;
        break;
-       
-    s8:O1=V4
+        
+     5:V0=i0
+       V1= V0 * 30;
+       V2= V1 * 12;
+       if(v3=='B'){O0=V1;}
+         else{O0=v2;}
+       if(V0==0|V0>9){state=s5; break;}
        if(i1==0){state=s7; V4=O1;}
        if(i3==0){state=s7; V4=O1;}
        if(O1=0){state=s0;}
        break;
+        
+        
+     6:
+       if(i1==0){state=s6;}
+       if(i3==0){state=s7; V4=O1;}
+       if(O1=0){state=s0;}
+       break:
+    
+    7:
+      if(i3==1 & i2==0){state=s8;}
+      break;
+       
+    8:O1=V4
+      if(i1==0){state=s7; V4=O1;}
+      if(i3==0){state=s7; V4=O1;}
+      if(O1=0){state=s0;}
+      break;
     
     }
   }
