@@ -20,40 +20,40 @@ void FSM()
          if(Keypad_input='D'){state=s4;}
          break;
       
-      1:i0='A';                 //keypad_input
-         O0='popcorn'
-         O1=60;                //countdown
-         if(i1==0){state=s7; V4=O1}
-         if(i3==0){state=s7;V4=O1}
-         if(O1=0){state=s0;}
+      1: i0='A';                 //keypad_input
+         LCD_display='popcorn';
+         countdown=60;                //countdown
+         if(sw1_check==0){state=7; counter=countdown;}
+         if(sw3_check==0){state=7; counter=countdown;}
+         if(countdown=0){state=0;}
          break;
      
-     2:i0='B';
-        v3='B'
-        O0='beef'
-        state=s5;
+     2: 
+        beefORchicken='B';
+        LCD_display='beef';
+        state=5;
         break;
         
-     3:i0='C';
-        v3=B
-        O0='chicken'
-        state=s5;
+     3: 
+        LCD_display='chicken';
+        state=5;
         break;
         
-     4:i0='D';
-       O0='cookingTime?';
-       state=s6;
-       break;
+     4: i0='D';
+        O0='cookingTime?';
+        state=s6;
+        break;
         
-     5:V0=i0
-       V1= V0 * 30;
-       V2= V1 * 12;
-       if(v3=='B'){O0=V1;}
-         else{O0=v2;}
+     5:
+       weightSelected=keypad_input
+       totalTime_B= V0 * 30;
+       totalTime_C= V1 * 12;
+       if(v3=='B'){countdown=totalTime_B;}
+         else{countdown=totalTime_C;}
        if(V0==0|V0>9){state=s5; break;}
-       if(i1==0){state=s7; V4=O1;}
-       if(i3==0){state=s7; V4=O1;}
-       if(O1=0){state=s0;}
+       if(sw1_check==0){state=7; counter=countdown;}
+       if(sw3_check==0){state=7; counter=countdown;}
+       if(countdown=0){state=0;}
        break;
         
         
