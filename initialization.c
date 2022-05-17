@@ -1,5 +1,6 @@
 #include <stdint.h>
 #include "tm4c123gh6pm.h"
+#define RED 0x02
 unsigned long counter;
 unsigned long ncols = 0;
 unsigned long nrows = 0;   
