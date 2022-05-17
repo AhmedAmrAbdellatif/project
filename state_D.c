@@ -41,7 +41,6 @@ long pushd_time;
 
 void pushD()
 {
-	char time[4] = {'0', '0', '0', '0'};	//	time array = 00 : 00
 	long i, j; //	counters
 	LCD_data('D');
 	delayms(500);
@@ -51,6 +50,7 @@ void pushD()
 	LCD_string("Cooking Time?");
 	delayms(1000); 
 take_input:
+	char time[4] = {'0', '0', '0', '0'};	//	time array = 00 : 00
 	clear_LCD;	
 	print_time(time);	// 00 : 00
 	
