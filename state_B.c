@@ -2,18 +2,18 @@
 void pushB()
 		{
 		char temp_input;	
-		LCD_data('B');                                // print "B" on LCD for 1 sec
-		delayms(1000);                   
-		clear_LCD;                                   // clear LCD 
-		delayms(50);
-		question:LCD_string("Beef Weight?");         // print "Beaf weight?" on LCD for 50 ms 
-		delayms(50);
+		LCD_data('B');                                  // print "B" on LCD for 1 sec
+		delayms(1000);                     
+		clear_LCD;                                      // clear LCD 
+		delayms(50); 
+		question:LCD_string("Beef Weight?");            // print "Beaf weight?" on LCD for 50 ms 
+		delayms(50); 
 		
-		temp_input = keypad_input();                 // get input from keypad
+		temp_input = keypad_input();                    // get input from keypad
 		LCD_data(temp_input);	
 			
 			
-		if ( temp_input <='9' && temp_input >='1')  // check if 1<=input<=9   
+		if ( temp_input <='9' && temp_input >='1')      // check if 1<=input<=9   
 		{
 			
 
@@ -29,19 +29,19 @@ void pushB()
 					
 				delayms(20);                    // SW2 is pressed start operation 
 				clear_LCD;
-				desired_weight('B', temp_input );		
+				desired_weight('B', temp_input );  		
 
 		}
 		
-		else
+		else                                           // for Invalid numbers errors 
 			{
-				clear_LCD;
+				clear_LCD;                     
 				LCD_string("Invalid Input");
 				delayms(1500);
 				clear_LCD;
 				LCD_string("Only Between 1:9");
 				delayms(1500);
 				clear_LCD;
-				goto question;
+				goto question;                // go to take new input 
 			}				
 		}
