@@ -1,3 +1,5 @@
+////     PortA (Pin5->RS)(Pin7->EN) & PortB (Pin0-7->D0-7)     ////
+
 void LCD_data(unsigned char data)
 {
 	GPIO_PORTA_DATA_R |= 0x20;		//setting RS
@@ -22,7 +24,7 @@ void LCD_command(unsigned char command)
 
 void LCD_init()
 {
-	SYSCTL_RCGCGPIO_R |= 0x03; // PortA (Pin 5:RS)(Pin 6:R/W)(Pin 7:EN) & PortB (Pin 0-7:D0-7)
+	SYSCTL_RCGCGPIO_R |= 0x03;
 	while((SYSCTL_PRGPIO_R&0x03) == 0){}
 	GPIO_PORTB_LOCK_R = 0x4C4F434B;
 	GPIO_PORTB_CR_R = 0xFF;
@@ -40,4 +42,10 @@ void LCD_init()
 	GPIO_PORTA_PUR_R &= ~0xE0;
 	GPIO_PORTA_DIR_R |= 0xE0;
 	GPIO_PORTA_DEN_R |= 0xE0;
+	LCD_command(0x20); 			//set 5x7 font size
+	LCD_command(0x38);			//8-bit data
+	LCD_command(0x02); 			//return cursor home
+	LCD_command(0x01);			//clear display
+	LCD_command(0x0F);			//diplay on & cursor blinking
+	LCD_command(0x30);			//wakeup
 }
