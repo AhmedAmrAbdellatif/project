@@ -32,7 +32,7 @@ void print_time (char time[4])
 void pushD()
 {
 	char time[4] = {'0', '0', '0', '0'};	//	time array = 00 : 00
-	long i, j; //	counters
+	long i, j, clear_counter; //	counters
 	switch_2 = false;
 	switch_1 = false;
 	/////////    display option D	/////////
@@ -51,7 +51,6 @@ take_input:
 	print_time(time);	// 00 : 00
 	for(i=0; i< 5; i++)
 	{
-		
 		// SW 2 is pressed start cooking
 		if (switch_2) 
 		{
@@ -101,7 +100,6 @@ take_input:
 			print_time(time);
 			i--; // repeat this iteration
 		}	
-		
 	}
 	
 start_cooking_d:
