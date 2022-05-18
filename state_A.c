@@ -6,3 +6,7 @@ void pushA()
 	delayms(500);
 	LCD_string("Popcorn");
 	delayms(2000);
+	clear_LCD;
+
+	LCD_countdown_display(60);
+       }
