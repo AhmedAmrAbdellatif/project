@@ -10,7 +10,7 @@ void SysTick_wait(unsigned long delay)
 	while( (NVIC_ST_CTRL_R & 0x00010000) == 0) {}	//checking for count bit
 }
 
-////	delay 1 m Sec	/////
+///	delay 1 millisecond	/////
 void delayms(unsigned long time)
 {
 	for (counter_delay=0; counter_delay<time ; counter_delay++)
