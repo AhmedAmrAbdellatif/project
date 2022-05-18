@@ -12,5 +12,8 @@ void SysTick_wait(unsigned long delay)
 
 void delayms(unsigned long time)
 {
-	
+	for (counter_delay=0; counter_delay<time ; counter_delay++)
+	{
+		SysTick_wait(16000);																																										
+	}
 }
