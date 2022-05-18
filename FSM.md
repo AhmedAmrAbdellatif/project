@@ -14,7 +14,7 @@ void FSM()
     switch(state)
     {
       0:
-         LCD_display='Enter choice';      //lcd_display 
+         LCD_display='Enter choice';      //show (enter choice) on LCD
          if(Keypad_input='A'){state=1;}
          if(Keypad_input='B'){state=2;}
          if(Keypad_input='C'){state=3;}
