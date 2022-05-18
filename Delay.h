@@ -1,6 +1,6 @@
 unsigned long counter_delay;
 
-////	main delay block	/////
+/////     main delay block     /////
 void SysTick_wait(unsigned long delay)												
 {
 	NVIC_ST_CTRL_R = 0x00;				//disable the systick
@@ -10,7 +10,7 @@ void SysTick_wait(unsigned long delay)
 	while( (NVIC_ST_CTRL_R & 0x00010000) == 0) {}	//checking for count bit
 }
 
-///	delay multiples of 1 millisecond	/////
+/////     delay multiples of 1 millisecond     /////
 void delayms(unsigned long time)
 {
 	for (counter_delay=0; counter_delay<time ; counter_delay++)
