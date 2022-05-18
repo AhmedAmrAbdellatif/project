@@ -100,4 +100,55 @@ take_input:
 			clear_LCD;
 			print_time(time);
 			i--; // repeat this iteration
+		}	
+		
+	}
+	
+start_cooking_d:
+	clear_LCD;
+	pushd_time = calc(time); // calculate time in seconds 
+	if (pushd_time > 1800 || pushd_time < 1) // maximum time 30 minutes = 1800 sec minimum time 1 second 
+	{
+		clear_LCD;
+		LCD_string("Out of Range");
+		delayms(1500);
+		if (pushd_time > 1800)
+		{
+			clear_LCD;	
+			LCD_string("Max. 30 minutes");
+			delayms(1500);
+		}	
+
+		if (pushd_time < 1)
+		{
+			clear_LCD;	
+			LCD_string("Min. 1 second");
+			delayms(1500);
+		}	
+
+		switch_2 = false;	
+		clear_LCD;	
+		for (clear_counter=0; clear_counter<4 ; clear_counter++)
+		{
+			time[clear_counter] = '0';
 		}
+
+		goto take_input;
+	}
+
+	LCD_number( pushd_time );
+	LCD_string(" seconds");
+
+	delayms(1500);
+	clear_LCD;
+
+	LCD_string("Begin Cooking");
+
+	delayms(1500);
+	clear_LCD;
+	switch_2 = false;
+	switch_1 = false;
+
+	LED_ON;
+	LCD_countdown_display(pushd_time);
+}
