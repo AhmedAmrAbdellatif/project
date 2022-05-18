@@ -19,7 +19,7 @@ void pushC()
 		{
 			
 
-					while (sw2() != 0x00)
+					while (sw2() != 0x00)   // if SW1 is pressed clear LCD in condition not pressing SW2
 					{
 						if (sw1() == 0x00)
 						{
@@ -29,13 +29,13 @@ void pushC()
 						}
 					}
 					
-				delayms(20);
+				delayms(20);                    // SW2 is pressed start operation 
 				clear_LCD;
 				desired_weight('C', temp_input );		
 
 		}
 		
-		else
+		else                                            // for Invalid numbers errors 
 			{
 				clear_LCD;
 				LCD_string("Invalid Input");
@@ -44,6 +44,6 @@ void pushC()
 				LCD_string("Only Between 1:9");
 				delayms(1500);
 				clear_LCD;
-				goto question;
+				goto question;                   // go to take new input 
 			}				
 		}
