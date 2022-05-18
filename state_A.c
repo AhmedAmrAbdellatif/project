@@ -1,7 +1,7 @@
 void pushA()
       {
-	LCD_data('A');
-	delayms(500);
+	LCD_data('A');  //show 'A' on LCD
+	delayms(500);	//show 'A' on LCD for (0.5sec)
 	clear_LCD;
 	delayms(500);
 	LCD_string("Popcorn");
