@@ -32,22 +32,22 @@ void FSM()
      
      2: 
         beefORchicken='B';
-        LCD_display='beef';
+        LCD_display='beef';   //output
         state=5;
         break;
         
      3: 
-        LCD_display='chicken';
+        LCD_display='chicken';//output
         state=5;
         break;
         
      4: 
-        LCD_display='cookingTime?';
+        LCD_display='cookingTime?';//output
         state=6;
         break;
         
      5:
-       weightSelected=keypad_input
+       weightSelected=keypad_input;
        totalTime_B= V0 * 30;
        totalTime_C= V1 * 12;
        if(v3=='B'){countdown=totalTime_B;}
