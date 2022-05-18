@@ -61,7 +61,7 @@ take_input:
 		
 		time_temp = keypad_input();
 		
-		// SW 1 is pressed clear LCD then return to the first iteration
+		// SW 1 is pressed clear LCD then restart iterations 
 		if (switch_1) 
 		{
 			switch_1 = false;
@@ -88,4 +88,16 @@ take_input:
 			time[0] = time_temp;        // new entry in seconds units 
 			clear_LCD;
 			print_time(time);
+		}
+		// wrong input	 print error for 2 sec then retake this input 
+		else
+		{
+			if (switch_2 == true) goto start_cooking_d;
+			if (switch_1 == true) continue;
+			clear_LCD;
+			LCD_string("Error");
+			delayms(2000);
+			clear_LCD;
+			print_time(time);
+			i--; // repeat this iteration
 		}
