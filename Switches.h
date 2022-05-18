@@ -29,13 +29,13 @@ void LEDSW_Init()
 	GPIO_PORTF_PUR_R |= 0x11;			//SET pull-up resistance
 }
 
-char turn;
+char turn;                                              // counter value 
 
  void blink_buzzer(unsigned char n)
 	{
 		for(turn=0; turn<n; turn++)
 		{
-		GPIO_PORTE_DATA_R |=0x20;   //buzzer pin on
+		GPIO_PORTE_DATA_R |=0x20;               //buzzer pin on
 		GPIO_PORTF_DATA_R |=0x0E;		
 		delayms(500);
 		GPIO_PORTE_DATA_R &=~0x20;
