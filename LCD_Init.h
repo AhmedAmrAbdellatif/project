@@ -58,8 +58,8 @@ void LCD_string(char *str)
 {
 	while(*str)
 	{
-		LCD_data(*str);			
-		delayms(1);			
-		str++;				
+		LCD_data(*str);			//printing character
+		delayms(1);			//delay 1 millisecond
+		str++;				//pointing to the next character			
 	}
 }
