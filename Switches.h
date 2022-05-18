@@ -44,10 +44,10 @@ char turn;                                              // counter value
 		}
  void blink()                                           //Blink leds 
 	{
-		GPIO_PORTF_DATA_R |=0x0E;		//Array of led on
-		delayms(500);
-		GPIO_PORTF_DATA_R &=~0x0E;              //Array of led off
-		delayms(500);
+	GPIO_PORTF_DATA_R |=0x0E;		        //Array of led on
+	delayms(500);
+	GPIO_PORTF_DATA_R &=~0x0E;                      //Array of led off
+	delayms(500);
 	}	
 	
 
