@@ -1,6 +1,6 @@
 void Interrupt_Init()          
 	{
-	SYSCTL_RCGCGPIO_R	|= 0x10;		//PORT E Clock enable
+	SYSCTL_RCGCGPIO_R	|= 0x10;     //PORT E Clock enable
 
 	while ( (SYSCTL_PRGPIO_R&0x10) == 0) {}	
 
@@ -11,18 +11,15 @@ void Interrupt_Init()
 		GPIO_PORTE_IM_R |= 0x1;      //arm interrupt on PE0
 		
 	NVIC_PRI1_R = (NVIC_PRI1_R&0xFFFFFF00)|0x00000040;  
-	NVIC_EN0_R = 0x10;         //Enable interrupt 4 in NVIC
+	NVIC_EN0_R = 0x10;                   //Enable interrupt 4 in NVIC
 		
-	EnableInterrupts();        //Enable global Interrupts flag
+	EnableInterrupts();                  //Enable global Interrupts flag
 	
 	}
 
 
-	void GPIOPortE_Handler(void)
-		{
-					GPIO_PORTE_ICR_R = 0x1;   // acknowledge flag0
-					blink();
-		}
-	
-
-
+void GPIOPortE_Handler(void)
+{
+	GPIO_PORTE_ICR_R = 0x1;   // acknowledge flag0
+	blink();
+}
