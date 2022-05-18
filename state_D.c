@@ -41,3 +41,41 @@ void pushD()
 	clear_LCD;
 	delayms(2);
 	
+	/////////    take inputs from Key bad and Disply it on LCD	/////////
+	clear_LCD;		// clearing the LCD
+	LCD_string("Cooking Time?");
+	delayms(2000); 		// 1 sec delay
+	clear_LCD;		// clearing the LCD
+	
+take_input:
+	
+	print_time(time);	// 00 : 00
+	for(i=0; i< 5; i++)
+	{
+		
+		// SW 2 is pressed
+		if (switch_2) 
+		{
+			switch_2 = false;
+			break;						
+		}
+		
+		time_temp = keypad_input();
+		
+		// SW 1 is pressed
+		if (switch_1) 
+		{
+			switch_1 = false;
+			i = -1; // return to first round
+			clear_LCD; // clear the lcd
+			for (clear_counter=0; clear_counter<4 ; clear_counter++)
+			{
+			time[clear_counter] = '0';
+			}
+			delayms(250);
+			print_time(time); // display 00:00	
+			continue;
+		}
+		
+		delayms(250);
+		
