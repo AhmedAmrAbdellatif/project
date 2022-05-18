@@ -28,11 +28,19 @@ void print_time (char time[4])
 		LCD_data(time[j]); 
 	}
 }
+void clear_time (char time[4])
+{
+	long  clear_counter; //	counter
+	for (clear_counter=0; clear_counter<4 ; clear_counter++)
+	{
+		time[clear_counter] = '0';
+	}
+}
 
 void pushD()
 {
 	char time[4] = {'0', '0', '0', '0'};	//	time array = 00 : 00
-	long i, j, clear_counter; //	counters
+	long i, j; //	counters
 	switch_2 = false;
 	switch_1 = false;
 	/////////    display option D	/////////
