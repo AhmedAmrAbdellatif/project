@@ -53,7 +53,7 @@ char keypad_input()
 			GPIO_PORTC_DATA_R = (1 << (column_scan_index+4) );
 			delayms (1);
 			
-			for(row_scan_index = 0; row_scan_index < 4; row_scan_index++)	//scan row
+			for(row_scan_index = 0; row_scan_index < 4; row_scan_index++)	//scan rows
 				{
 
 					
