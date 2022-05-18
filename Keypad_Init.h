@@ -43,7 +43,7 @@ char keypad_input()
 							break;						
 						}
 					// SW 1 is pressed
-					if (sw1 () == 0)                     //clear LCD
+					if (sw1 () == 0)                     //clear LC
 						{
 							switch_1 = true;
 							break;	
