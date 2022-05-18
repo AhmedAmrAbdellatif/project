@@ -9,3 +9,8 @@ void SysTick_wait(unsigned long delay)
 	while( (NVIC_ST_CTRL_R & 0x00010000) == 0) {
 	}
 }
+
+void delayms(unsigned long time)
+{
+	
+}
