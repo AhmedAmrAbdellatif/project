@@ -2,14 +2,14 @@
 void pushB()
 		{
 		char temp_input;	
-		LCD_data('B');
-		delayms(1000);
-		clear_LCD;
+		LCD_data('B');                          // print "B" on LCD for 1 sec
+		delayms(1000);                   
+		clear_LCD;                              // clear LCD 
 		delayms(50);
-		question:LCD_string("Beef Weight?");
+		question:LCD_string("Beef Weight?");    // print "Beaf weight?" on LCD for 50 ms 
 		delayms(50);
 		
-		temp_input = keypad_input();
+		temp_input = keypad_input();            // get input from keypad
 		LCD_data(temp_input);	
 			
 			
