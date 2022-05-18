@@ -4,18 +4,18 @@ void pushC()
 			
 		char temp_input;
 	
-		LCD_data('C');
+		LCD_data('C');                                  // Show "C" on LCD for 1 sec
 		delayms(1000);
 		clear_LCD;
-		delayms(50);
-		question:LCD_string("Chicken Weight?");
+		delayms(50);                                 
+		question:LCD_string("Chicken Weight?");         // Ask for number of kilos 
 		delayms(50);
 		
-		temp_input = keypad_input();
+		temp_input = keypad_input();                    // get input from keypad
 		LCD_data(temp_input);	
 			
 			
-		if ( temp_input <='9' && temp_input >='1')
+		if ( temp_input <='9' && temp_input >='1')      // check if 1<=input<=9 
 		{
 			
 
