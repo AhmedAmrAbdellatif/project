@@ -36,7 +36,7 @@ void pushB()
 		else                                           // for Invalid numbers errors 
 			{
 				clear_LCD;                     
-				LCD_string("Invalid Input");
+				LCD_string("Invalid Input");   // Show "Invalid Input " on LCD
 				delayms(1500);
 				clear_LCD;
 				LCD_string("Only Between 1:9");
