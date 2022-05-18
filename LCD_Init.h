@@ -63,3 +63,161 @@ void LCD_string(char *str)
 		str++;				//pointing to the next character			
 	}
 }
+
+
+
+
+	void LCD_number(long int number)
+		{
+			
+		uint16_t i=0,auff[20];
+			
+		if (number<0)
+						{
+							LCD_data('-');
+							number*=(-1);
+						}
+	
+		temp=number;
+						
+						for(i=0;number!=0;i++)
+						{
+							auff[i]=temp%10;
+							number=number/10;
+							temp=number;
+						}
+							for( ; i!=0 ; --i)
+							{
+							LCD_data(auff[i-1]+48);
+							}	
+			}
+
+
+		char LCD_converter(int value)
+				{
+					
+				uint16_t i=0,buff[20];
+					
+				if (value<0)
+								{
+									return('-');
+									value*=(-1);
+								}
+								
+				if (value==0) return '0';			
+			
+				temp=value;
+								
+								for(i=0;value!=0;i++)
+								{
+									buff[i]=temp%10;
+									value=value/10;
+									temp=value;
+								}
+									for( ; i!=0 ; --i)
+									{
+									return(buff[i-1]+48);
+									}	
+					}
+		
+	int minutes;
+	int minutes_tens;
+	int minutes_units;
+	int seconds;
+	int seconds_tens;
+	int seconds_units;
+	bool close_check;
+	char temp_quick_cooking;
+		
+	void LCD_countdown_display(int value)
+	{
+		
+		minutes = value/60;
+		minutes_tens = minutes/10;
+		minutes_units = minutes - (minutes_tens*10);
+		
+		seconds = value - (minutes * 60);
+		seconds_tens = seconds/10;
+		seconds_units = seconds - (seconds_tens*10);
+				
+		LCD_data( LCD_converter(minutes_tens) );
+		LCD_data( LCD_converter(minutes_units) );
+		LCD_data(':');
+		LCD_data( LCD_converter(seconds_tens) );
+		LCD_data( LCD_converter(seconds_units) );
+		close_check = false;
+		
+		while(minutes_tens>-1)
+		{
+			GPIO_PORTF_DATA_R |=0x0E;
+			while(minutes_units>-1)
+			{
+				while(seconds_tens>-1)
+				{
+						while(seconds_units>-1)
+						{
+											if ( temp_quick_cooking == '0' ) 
+											{ if(sw2() == 0x00 && seconds_tens < 5 )
+												{
+													seconds_tens ++;
+													seconds_units++;
+												}
+											}
+								if(sw1() == 0x00)
+								{
+									delayms(10);
+									while(sw1() == 0x00){};
+									while((sw1() == 0x10) && (sw2() == 0x01))
+									{
+										LCD_command(0x01);
+										GPIO_PORTF_DATA_R |=0x0E;
+										LCD_data( LCD_converter(minutes_tens) );
+										LCD_data( LCD_converter(minutes_units) );
+										LCD_data(':');
+										LCD_data( LCD_converter(seconds_tens) );
+										LCD_data( LCD_converter(seconds_units+1) );
+										delayms(500);
+										GPIO_PORTF_DATA_R &=~0x0E;
+										delayms(500);	
+									}
+									
+									if(sw1() == 0x00)
+										{
+										while(sw1() == 0x00);
+										close_check = true;
+										temp_quick_cooking = 0;
+										seconds_tens = 0;
+										minutes_units = 0;
+										minutes_tens = 0;
+										LCD_command(0x01);
+										break;
+										}
+								}
+									GPIO_PORTF_DATA_R |=0x0E;
+									LCD_command(0x01);
+									LCD_data( LCD_converter(minutes_tens) );
+									LCD_data( LCD_converter(minutes_units) );
+									LCD_data(':');
+									LCD_data( LCD_converter(seconds_tens) );
+									LCD_data( LCD_converter(seconds_units) );
+									delayms(1000);
+									seconds_units--;
+								}
+					
+						seconds_units = 9;
+						seconds_tens--;
+					}
+					seconds_tens = 5;
+					minutes_units--;
+				}	
+			minutes_units = 9;
+			minutes_tens--;
+			
+			temp_quick_cooking = 0;						
+			if (close_check == false )
+				{
+					GPIO_PORTF_DATA_R &=~0x0E;
+					complete();
+				}
+		}		
+	}	
