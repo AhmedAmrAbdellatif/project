@@ -37,13 +37,13 @@ char keypad_input()
  	while(1)		
 	{
 					// SW 2 is pressed
-					if (sw2 () == 0) 
+					if (sw2 () == 0)                     //start cooking
 						{
-							switch_2 = true;
+							switch_2 = true;  
 							break;						
 						}
 					// SW 1 is pressed
-					if (sw1 () == 0) 
+					if (sw1 () == 0)                     //clear LCD
 						{
 							switch_1 = true;
 							break;	
