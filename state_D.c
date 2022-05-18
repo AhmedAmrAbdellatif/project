@@ -1,13 +1,13 @@
 ////	calculating cooking time in secends	////
-unsigned long calc(char arr[4])
+unsigned long calc(char time[4])
 {
 	unsigned long duration = 0;
 	long i;
-	for (i = 0; i<4 ;i++)	// convert from char --> number
+	for (i = 0; i<4 ;i++)	
 	{
-		arr [i]= (arr[i] - '0');
+		time [i] -= '0';	// convert from char --> number
 	}
-	duration = arr[0] + arr[1]*10 + arr[2]*60 + arr[3]*600;
+	duration = time[0] + time[1]*10 + time[2]*60 + time[3]*600;   // second units +  second tens + minute units +  minute tens
 	return duration;
 }
 
@@ -52,25 +52,25 @@ void pushD()
 	delayms(2);
 	
 	/////////    take inputs from Key bad and Disply it on LCD	/////////
-	clear_LCD;		// clearing the LCD
+	clear_LCD;	
 	LCD_string("Cooking Time?");
-	delayms(2000); 		// 1 sec delay
+	delayms(2000); 		
 	
 take_input:
 	print_time(time);	// 00 : 00
 	for(i=0; i< 5; i++)
 	{
-		// SW 2 is pressed start cooking
-		if (switch_2) 
+		
+		time_temp = keypad_input();
+		
+		////	check the switches	////
+		if (switch_2)  // SW 2 is pressed start cooking
 		{
 			switch_2 = false;
 			break;						
 		}
 		
-		time_temp = keypad_input();
-		
-		// SW 1 is pressed clear LCD then restart iterations 
-		if (switch_1) 
+		if (switch_1) 	// SW 1 is pressed clear LCD then restart iterations 
 		{
 			switch_1 = false;
 			i = -1; // first iteration
@@ -80,10 +80,11 @@ take_input:
 			continue;
 		}
 		
+		////	take action	////
 		delayms(250);
 		
 		////	  shifting elements of time array before the new entry    ////
-		if (time_temp >= '0' && time_temp <= '9')	//time must be number
+		if (time_temp >= '0' && time_temp <= '9')	
 		{
 			for(j=i-1; j>=0; j--) 
 			{
@@ -95,8 +96,11 @@ take_input:
 		// wrong input	 print error for 2 sec then retake this input 
 		else
 		{
+			////	check the switches	////
 			if (switch_2 == true) goto start_cooking_d;
 			if (switch_1 == true) continue;
+			
+			////	take action	////
 			clear_LCD;
 			LCD_string("Error");
 			delayms(2000);
@@ -108,7 +112,7 @@ take_input:
 start_cooking_d:
 	clear_LCD;
 	pushd_time = calc(time); // calculate time in seconds 
-	if (pushd_time > 1800 || pushd_time < 1) // maximum time 30 minutes = 1800 sec minimum time 1 second 
+	if (pushd_time > 1800 || pushd_time < 1) // range from  1 second to 30 minutes
 	{
 		clear_LCD;
 		LCD_string("Out of Range");
