@@ -15,6 +15,6 @@ void delayms(unsigned long time)
 {
 	for (counter_delay=0; counter_delay<time ; counter_delay++)
 	{
-		SysTick_wait(16000);																																										
+		SysTick_wait(16000);			//delay 1 millisecond																																								
 	}
 }
