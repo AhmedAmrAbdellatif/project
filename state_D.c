@@ -74,10 +74,7 @@ take_input:
 			switch_1 = false;
 			i = -1; // first iteration
 			clear_LCD; // clear the lcd
-			for (clear_counter=0; clear_counter<4 ; clear_counter++)
-			{
-				time[clear_counter] = '0';
-			}
+			clear_time (time);
 			delayms(250);
 			print_time(time); // display 00:00	
 			continue;
@@ -134,11 +131,7 @@ start_cooking_d:
 
 		switch_2 = false;	
 		clear_LCD;	
-		for (clear_counter=0; clear_counter<4 ; clear_counter++)
-		{
-			time[clear_counter] = '0';
-		}
-
+		clear_time(time);
 		goto take_input;
 	}
 
