@@ -1,5 +1,6 @@
 ////     PortA (Pin5->RS)(Pin7->EN) & PortB (Pin0-7->D0-7)     ////
 
+////     LCD character print     ////
 void LCD_data(unsigned char data)
 {
 	GPIO_PORTA_DATA_R |= 0x20;		//setting RS
@@ -11,6 +12,7 @@ void LCD_data(unsigned char data)
 	delayms(2);				//delay 2 milliseconds
 }
 
+////     LCD control     ////
 void LCD_command(unsigned char command)
 {
 	GPIO_PORTA_DATA_R &= ~0x20; 		//clearing RS
@@ -22,6 +24,7 @@ void LCD_command(unsigned char command)
 	delayms(2);				//delay 2 milliseconds
 }
 
+////     LCD initialization     ////
 void LCD_init()
 {
 	SYSCTL_RCGCGPIO_R |= 0x03;
@@ -48,4 +51,15 @@ void LCD_init()
 	LCD_command(0x01);			//clear display
 	LCD_command(0x0F);			//diplay on & cursor blinking
 	LCD_command(0x30);			//wakeup
+}
+
+////     LCD string print     ////
+void LCD_string(char *str)
+{
+	while(*str)
+	{
+		LCD_data(*str);			
+		delayms(1);			
+		str++;				
+	}
 }
