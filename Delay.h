@@ -1,5 +1,6 @@
 unsigned long counter_delay;
 
+////	main delay block	/////
 void SysTick_wait(unsigned long delay)												
 {
 	NVIC_ST_CTRL_R = 0x00;
