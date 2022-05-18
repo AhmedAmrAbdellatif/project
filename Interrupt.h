@@ -7,7 +7,7 @@ void Interrupt_Init()
 		GPIO_PORTE_IS_R |= 0x1;      //PE0 is edge-sensitive
 		GPIO_PORTE_IBE_R |= 0x0;     //PE0 is not both edges
 		GPIO_PORTE_IEV_R |= 0x1;     //PE0 falling edge event
-		GPIO_PORTE_ICR_R = 0x1;      //clear flag4
+		GPIO_PORTE_ICR_R = 0x1;      //clear flag
 		GPIO_PORTE_IM_R |= 0x1;      //arm interrupt on PE0
 		
 	NVIC_PRI1_R = (NVIC_PRI1_R&0xFFFFFF00)|0x00000040;  
