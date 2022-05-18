@@ -11,9 +11,11 @@ unsigned long calc(char arr[4])
 	return duration;
 }
 
+////	clear the LCD then display time on it	////
 void print_time (char time[4])
 {
 	long j; //	counter
+	clear_LCD; 
 	//// 	display minutes on LCD 	////
 	for(j=3; j>1; j--)
 	{
@@ -53,7 +55,6 @@ void pushD()
 	clear_LCD;		// clearing the LCD
 	LCD_string("Cooking Time?");
 	delayms(2000); 		// 1 sec delay
-	clear_LCD;		// clearing the LCD
 	
 take_input:
 	print_time(time);	// 00 : 00
@@ -73,8 +74,7 @@ take_input:
 		{
 			switch_1 = false;
 			i = -1; // first iteration
-			clear_LCD; // clear the lcd
-			clear_time (time);
+			clear_time (time); // time = 00:00
 			delayms(250);
 			print_time(time); // display 00:00	
 			continue;
@@ -90,7 +90,6 @@ take_input:
 				time[j+1] = time[j];	// 10 minutes <--- 10 minutes <--- 10 Seconds <--- Seconds
 			}
 			time[0] = time_temp;        // new entry in seconds units 
-			clear_LCD;
 			print_time(time);
 		}
 		// wrong input	 print error for 2 sec then retake this input 
@@ -101,7 +100,6 @@ take_input:
 			clear_LCD;
 			LCD_string("Error");
 			delayms(2000);
-			clear_LCD;
 			print_time(time);
 			i--; // repeat this iteration
 		}	
