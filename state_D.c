@@ -48,12 +48,11 @@ void pushD()
 	clear_LCD;		// clearing the LCD
 	
 take_input:
-	
 	print_time(time);	// 00 : 00
 	for(i=0; i< 5; i++)
 	{
 		
-		// SW 2 is pressed
+		// SW 2 is pressed start cooking
 		if (switch_2) 
 		{
 			switch_2 = false;
@@ -62,15 +61,15 @@ take_input:
 		
 		time_temp = keypad_input();
 		
-		// SW 1 is pressed
+		// SW 1 is pressed clear LCD then return to the first iteration
 		if (switch_1) 
 		{
 			switch_1 = false;
-			i = -1; // return to first round
+			i = -1; // first iteration
 			clear_LCD; // clear the lcd
 			for (clear_counter=0; clear_counter<4 ; clear_counter++)
 			{
-			time[clear_counter] = '0';
+				time[clear_counter] = '0';
 			}
 			delayms(250);
 			print_time(time); // display 00:00	
@@ -79,3 +78,14 @@ take_input:
 		
 		delayms(250);
 		
+		////	  shifting elements of time array before the new entry    ////
+		if (time_temp >= '0' && time_temp <= '9')	//time must be number
+		{
+			for(j=i-1; j>=0; j--) 
+			{
+				time[j+1] = time[j];	// 10 minutes <--- 10 minutes <--- 10 Seconds <--- Seconds
+			}
+			time[0] = time_temp;        // new entry in seconds units 
+			clear_LCD;
+			print_time(time);
+		}
