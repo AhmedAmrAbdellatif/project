@@ -1,4 +1,4 @@
-////     PortA (Pin5->RS)(Pin7->EN) & PortB (Pin0-7->D0-7)     ////
+////     (PA5 -> RS) & (PA7 -> EN) & (PB0-7 -> D0-7)     ////
 
 ////     LCD character print     ////
 void LCD_data(unsigned char data)
