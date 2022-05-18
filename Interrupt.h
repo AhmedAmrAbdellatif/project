@@ -20,7 +20,7 @@ void Interrupt_Init()
 
 	void GPIOPortE_Handler(void)
 		{
-					GPIO_PORTE_ICR_R = 0x1;
+					GPIO_PORTE_ICR_R = 0x1;   // acknowledge flag
 					blink();
 		}
 	
