@@ -19,3 +19,17 @@ void LCD_command(unsigned char command)
 	GPIO_PORTA_DATA_R &= ~0x80; 		//clearing EN
 	delayms(2);				//delay 2 milliseconds
 }
+
+void LCD_init()
+{
+	SYSCTL_RCGCGPIO_R |= 0x03; // PortA (Pin 5:RS)(Pin 6:R/W)(Pin 7:EN) & PortB (Pin 0-7:D0-7)
+	while((SYSCTL_PRGPIO_R&0x03) == 0){}
+	GPIO_PORTB_LOCK_R = 0x4C4F434B;
+	GPIO_PORTB_CR_R = 0xFF;
+	GPIO_PORTB_AFSEL_R = 0;
+	GPIO_PORTB_PCTL_R  = 0;
+	GPIO_PORTB_AMSEL_R = 0;
+	GPIO_PORTB_PUR_R = 0;
+	GPIO_PORTB_DIR_R = 0xFF;
+	GPIO_PORTB_DEN_R = 0xFF;
+}
