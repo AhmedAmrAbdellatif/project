@@ -21,7 +21,7 @@ void keypad_Init()
 {
  	SYSCTL_RCGCGPIO_R |= 0x14;            //enable clc for port C & E  
   	while ((SYSCTL_RCGCGPIO_R&0x14)==0);  //wait for clock to be enabled
- 	GPIO_PORTC_CR_R  |= 0xF0;             //allow changes to all the bits in port C
+ 	GPIO_PORTC_CR_R  |= 0xF0;             //allow changes to the bits in port C
         GPIO_PORTE_CR_R  |= 0x1E;             //allow changes to all the bits in port E
         GPIO_PORTC_DIR_R |= 0xF0;             //set directions cols are o/ps
 	GPIO_PORTE_DIR_R &=~ 0x1E;             //set directions raws are column_scan_index/ps
