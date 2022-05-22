@@ -8,7 +8,17 @@ void pushA()
  /////////showing popcorn///////////
 
  LCD_string("Popcorn");		//show 'A' on LCD
- delayms(2000);			//show 'A' on LCD for (2sec)
+	delayms(500);
+		
+					while (sw2() != 0x00)														
+					{														
+						if (sw1() == 0x00)
+						{
+							clear_LCD;
+							delayms(50);
+							return;
+						}
+					}																								
  clear_LCD;			//clear LCD
 
  //////////countdown///////////
