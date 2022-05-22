@@ -1,5 +1,7 @@
 void Interrupt_Init()          
 	{
+	DisableInterrupts();		     //Disable global Interrupts flag initially
+	
 	SYSCTL_RCGCGPIO_R	|= 0x10;     //PORT E Clock enable
 
 	while ( (SYSCTL_PRGPIO_R&0x10) == 0) {}	
@@ -13,8 +15,6 @@ void Interrupt_Init()
 	NVIC_PRI1_R = (NVIC_PRI1_R&0xFFFFFF00)|0x00000040;  
 	NVIC_EN0_R = 0x10;                   //Enable interrupt 4 in NVIC
 		
-	EnableInterrupts();                  //Enable global Interrupts flag
-	
 	}
 
 
