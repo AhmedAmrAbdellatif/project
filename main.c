@@ -12,6 +12,7 @@ void SystemInit(){};
 		
 		while(1)
 		{
+			DisableInterrupts();
 			idle: LCD_string("Enter choice:");
 			switch (keypad_input())
 			{
