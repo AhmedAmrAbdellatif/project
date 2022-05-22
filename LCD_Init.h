@@ -146,6 +146,7 @@ void LCD_string(char *str)
 		LCD_data( LCD_converter(seconds_tens) );
 		LCD_data( LCD_converter(seconds_units) );
 		close_check = false;
+		EnableInterrupts();
 		
 		while(minutes_tens>-1)
 		{
