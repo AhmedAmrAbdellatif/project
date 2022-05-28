@@ -1,4 +1,4 @@
-states{Idle0 ,popcorn1 ,beef2 ,chicken3 ,chooseTime4 ,selectWeight5 , writeTime6 ,pause7 ,cont_count8} //state
+states{Idle ,popcorn ,beef ,chicken ,chooseTime ,selectWeight , writeTime ,pause ,cont_count} //state
 Inputs{keypad_input , sw1 ,sw2 ,sw3}  //input
 outputs{LCD_display ,countdown}  //output
 variables{weightSelected ,totalTime_B ,totalTime_C, beefORchicken, counter}  //variable
