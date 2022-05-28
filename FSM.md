@@ -22,7 +22,7 @@ void FSM()
          if(Keypad_input='D'){state=4;}
          break;
       
-      1: i0='A';                 //keypad_input
+      1: keypad_input='A';                 //keypad_input
          LCD_display='popcorn';
          countdown=60;                //countdown
          if(sw1_check==0){state=7; counter=countdown;}
